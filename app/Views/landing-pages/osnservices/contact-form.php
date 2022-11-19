@@ -1,7 +1,7 @@
 <section id="contact-us" class="content-section-a">
 
     <div class="container">
-        <form name="ITR-Filing-Contact-Data" id="upload" method="POST">
+        <form class="contact-form" name="ITR-Filing-Contact-Data" id="upload">
             <div class="row">
                 <div class="col-md-6 col-sm-12">
                     <input style="margin-top:20px" name="First_Name" type="text" class="form-control" placeholder="First Name" required="Required Field">
@@ -26,7 +26,7 @@
                     <select style="margin-top:20px" class="form-control" name="Option-1" onchange="myFunction1()" id="option-1">
                         <option value="select">----select----</option>
                         <option value="New Customer">New Customer</option>
-                        <!-- <option value="Information regarding ITR">Information regarding ITR</option> -->
+                        <option value="Information regarding ITR">Information regarding ITR</option>
                         <option value="ITR Filing">ITR Filing</option>
                         <option value="Referral">Referral</option>
                         <option value="Document Attachment">Document Attachment</option>
@@ -65,7 +65,7 @@
                 </div>
             </div>
 
-            <div class="row" id="choose-files-div" style="display: flex;">
+            <div class="row" id="choose-files-div" style="display: none;">
                 <div class="col-sm-4">
                     <div style="margin:20px 10px" class="row form-group">
                         <label style="padding-right:15px">Aadhaar Card Card</label><br>
@@ -92,7 +92,5 @@
             </div>
         </form>
 
-        <hr class="featurette-divider">
     </div>
-    <!-- /.container -->
 </section>
