@@ -1,44 +1,96 @@
-function myFunction1() {
+let app = {};
+
+app.contactFormSelector = () => {
     var x = document.getElementById("option-1").value;
-    if (x == 'select') {
+    if (x == '') {
         document.getElementById("message-div").style.display = 'none';
         document.getElementById("itr-info-div").style.display = 'none';
-        document.getElementById("itr-fling-message-div").style.display = 'none';
-        document.getElementById("referral-div").style.display = 'none';
-        document.getElementById("choose-files-div").style.display = 'none';
     } if (x == 'New Customer') {
         document.getElementById("message-div").style.display = 'flex';
         document.getElementById("itr-info-div").style.display = 'none';
-        document.getElementById("itr-fling-message-div").style.display = 'none';
-        document.getElementById("referral-div").style.display = 'none';
-        document.getElementById("choose-files-div").style.display = 'none';
+        app.changePlaceholder("Write Your Message")
     }
     if (x == 'Information regarding ITR') {
         document.getElementById("message-div").style.display = 'none';
         document.getElementById("itr-info-div").style.display = 'flex';
-        document.getElementById("itr-fling-message-div").style.display = 'none';
-        document.getElementById("referral-div").style.display = 'none';
-        document.getElementById("choose-files-div").style.display = 'none';
     }
     if (x == 'ITR Filing') {
-        document.getElementById("message-div").style.display = 'none';
+        document.getElementById("message-div").style.display = 'flex';
         document.getElementById("itr-info-div").style.display = 'none';
-        document.getElementById("itr-fling-message-div").style.display = 'flex';
-        document.getElementById("referral-div").style.display = 'none';
-        document.getElementById("choose-files-div").style.display = 'none';
+        app.changePlaceholder("Write Your Message & Time between we can connect you.")
     }
     if (x == 'Referral') {
-        document.getElementById("message-div").style.display = 'none';
+        document.getElementById("message-div").style.display = 'flex';
         document.getElementById("itr-info-div").style.display = 'none';
-        document.getElementById("itr-fling-message-div").style.display = 'none';
-        document.getElementById("referral-div").style.display = 'flex';
-        document.getElementById("choose-files-div").style.display = 'none';
-    }
-    if (x == 'Document Attachment') {
-        document.getElementById("message-div").style.display = 'none';
-        document.getElementById("itr-info-div").style.display = 'none';
-        document.getElementById("itr-fling-message-div").style.display = 'none';
-        document.getElementById("referral-div").style.display = 'none';
-        document.getElementById("choose-files-div").style.display = 'flex';
+        app.changePlaceholder("Write the details of the Referral Person (Name & Contact No.)")
     }
 }
+
+app.changePlaceholder = (text) => {
+    $("textarea[name='Message-Default']").attr("placeholder",text)
+}
+
+app.fillProgress = (e) => {
+    console.log(e)
+    let i = 0;
+    var width = 1;
+    var id = setInterval(frame, 30);
+    function frame() {
+      if (width >= 100) {
+        clearInterval(id);
+        i = 0;
+      } else {
+        width++;
+        $(e).width(width + "%");
+      }
+    }
+}
+
+
+
+
+
+
+
+
+
+// ajax call 
+
+$('#contact-btn-success').click(function(e) {
+    e.preventDefault()
+    let data = {};
+    let first_name_val =  $('input[name=First_Name]').val()
+    if(first_name_val==""){
+        $('input[name=First_Name]').parent().append("<span>Error</span>")
+        return false;
+    }
+    data.first_name=
+    data.last_name=$('input[name=Last_Name]').val()
+    data.email_id=$('input[name=Email_Id]').val()
+    data.mobile_no=$('input[name=Mobile_No]').val()
+    data.reason_options=$('select[name=Option-1]').val()
+    data.default_message=$('textarea[name=Message-Default]').val()
+    data.itr_options=$('select[name=Option-2]').val()
+    data.form_type=$('input[name=form_type]').val()
+    $.ajax({
+        url:BASE_URL+"/form-submit",
+        type:'POST',
+        dataType:"json",
+        data:data,
+        success:function(res){
+            if(res.status){
+                console.log(res)
+                $('.short-popup-msg').find('.popup-desc').html(res.message)
+                $('.short-popup-msg').css("display","block")
+                let e = $('.short-popup-msg').find('.popup-msg-progressbar')
+                app.fillProgress(e)
+                setInterval(() => {
+                    window.location.href=BASE_URL;
+                }, 3000);
+            }else{
+                console.log(res)
+            }
+        }
+    })
+})
+

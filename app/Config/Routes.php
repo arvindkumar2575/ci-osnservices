@@ -40,7 +40,7 @@ $routes->get('/about-us', 'Home::aboutUs');
 $routes->get('/contact-us', 'Home::contactUs');
 
 
-$routes->post('/form-submit', 'Home::formSubmit');
+$routes->post('/form-submit', 'Home::contactFormSubmit');
 
 /*
  * --------------------------------------------------------------------

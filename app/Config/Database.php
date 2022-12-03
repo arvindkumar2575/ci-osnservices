@@ -87,5 +87,9 @@ class Database extends Config
         if (ENVIRONMENT === 'testing') {
             $this->defaultGroup = 'tests';
         }
+        $this->default['hostname'] = getenv('DEV_DB_HOSTNAME');
+        $this->default['username'] = getenv('DEV_DB_USERNAME');
+        $this->default['password'] = getenv('DEV_DB_PASSWORD');
+        $this->default['database'] = getenv('DEV_DB_NAME');
     }
 }
