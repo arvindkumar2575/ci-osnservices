@@ -1,7 +1,8 @@
-<hr class="featurette-divider">
-<footer class="container">
-    <p class="float-end"><a href="#">Back to top</a></p>
-    <p>&copy; 2015–2022 Company, Inc.</p>
+<footer class="footer">
+    <div class="container content">
+    <p class="float-end mb-0 back-to-top"><a href="#">Back to top</a></p>
+    <p class="company-copyright mb-0">&copy; 2015–2022 Company, Inc.</p>
+    </div>
 </footer>
 <?= view(OSNSERVICES_VIEWPATH . '/components/popup-msg') ?>
 <?= view(OSNSERVICES_VIEWPATH . '/components/scripts') ?>

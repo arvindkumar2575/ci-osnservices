@@ -11,7 +11,7 @@
                 <div class="carousel-caption">
                     <h1>OSN SERVICES</h1>
                     <p>Where You Find Easy & Most Usable Digital Services</p>
-                    <p><a class="btn btn-lg btn-primary" href="<?= base_url('contact-us') ?>">Fill Form</a></p>
+                    <p><a class="btn btn-lg btn-primary" href="<?= base_url('contact-us?q=new-customer') ?>">Fill Form</a></p>
                 </div>
             </div>
         </div>
@@ -21,7 +21,7 @@
                 <div class="carousel-caption">
                     <h1>Income Tax Filing</h1>
                     <p>Filing your income tax return with our affordable price</p>
-                    <p><a class="btn btn-lg btn-primary" href="<?= base_url('contact-us?q=itr') ?>">ITR Filing</a></p>
+                    <p><a class="btn btn-lg btn-primary" href="<?= base_url('contact-us?q=itr-filing') ?>">ITR Filing</a></p>
                 </div>
             </div>
         </div>

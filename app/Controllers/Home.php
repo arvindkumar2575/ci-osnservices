@@ -55,7 +55,7 @@ class Home extends BaseController
             $reason_options = $this->request->getVar('reason_options');
             $default_message = $this->request->getVar('default_message');
             $itr_options = $this->request->getVar('itr_options');
-
+            // echo '<pre>';var_dump($first_name,$last_name,$email_id,$mobile_no,$reason_options);die;
             if(empty($first_name)||empty($last_name)||empty($email_id)||empty($mobile_no)||empty($reason_options)){
                 $result = array('status'=>false,'message'=>'All fields are required!');
                 return json_encode($result);
