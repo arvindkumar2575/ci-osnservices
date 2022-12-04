@@ -3,7 +3,7 @@
     <div class="container">
         <form class="contact-form" name="ITR-Filing-Contact-Data" id="upload" method="POST">
             <div class="row">
-                <div class="col-md-6 col-sm-12 cf-feild">
+                <div class="col-md-6 col-sm-12">
                     <input style="margin-top:20px" name="First_Name" type="text" class="form-control" placeholder="First Name" required="Required Field"/>
                 </div>
                 <div class="col-md-6 col-sm-12">
@@ -29,6 +29,7 @@
                         <option value="Information regarding ITR">Information regarding ITR</option>
                         <option value="ITR Filing">ITR Filing</option>
                         <option value="Referral">Referral</option>
+                        <option value="Dashboard Query">Dashboard Query</option>
                         <?php /*<option value="Document Attachment">Document Attachment</option>*/?>
                     </select>
                 </div>
