@@ -14,6 +14,7 @@ class ContactForm extends Model
     {
         $query = $this->db->query('SELECT * FROM settings');
         $result = $query->getResultArray();
+        echo $this->db->lastQuery;die();
         return $result;
     }
 }

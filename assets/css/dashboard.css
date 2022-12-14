@@ -1,0 +1,37 @@
+
+/* login form class  */
+.login-form form{
+    margin: 0 auto;
+    /* width: 600px; */
+}
+
+
+/* field error  */
+.field-focus-error{
+    border: 1px solid #f00;
+    box-shadow: 0 0 0.1rem 0.25rem #f00
+}
+
+.main-body{
+    position: relative;
+}
+
+.sidebar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 250px;
+    height: 100vh;
+    overflow-y: auto;
+    background: var(--light);
+    transition: 0.5s;
+    z-index: 999;
+}
+
+.content {
+    margin-left: 250px;
+    min-height: 100vh;
+    background: #FFFFFF;
+    transition: 0.5s;
+}

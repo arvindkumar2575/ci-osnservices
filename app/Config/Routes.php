@@ -39,8 +39,16 @@ $routes->get('/', 'Home::index');
 $routes->get('/about-us', 'Home::aboutUs');
 $routes->get('/contact-us', 'Home::contactUs');
 
+$routes->get('login', 'User::index');
+$routes->get('logout', 'User::logout');
+$routes->get('dashboard', 'User::dashboard');
 
-$routes->post('/form-submit', 'Home::contactFormSubmit');
+
+$routes->post('api/form-submit', 'Home::contactFormSubmit');
+$routes->get('api/login', 'User::userLogin');
+
+
+
 
 /*
  * --------------------------------------------------------------------

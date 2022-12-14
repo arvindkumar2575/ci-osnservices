@@ -96,4 +96,7 @@ define('EVENT_PRIORITY_HIGH', 10);
 
 
 define('LANDING_PAGES_VIEWPATH', 'landing-pages');
+define('COMMON_VIEWPATH', 'common');
 define('OSNSERVICES_VIEWPATH', LANDING_PAGES_VIEWPATH.'/osnservices');
+define('OSN_VIEWPATH', 'osn_v1');
+

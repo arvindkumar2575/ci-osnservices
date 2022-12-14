@@ -19,7 +19,7 @@
         <div class="col-md-7 order-md-2">
             <h2 class="featurette-heading fw-normal lh-1">Dashboard Designing</h2>
             <p class="lead">Analyse your business Ups & Down, Profit & Loss by our Dashboard Product specially design for business purpose.</p>
-            <p>Write your query <a href="<?= base_url('contact-us?q-dashboard') ?>">here</a> to know more our services.</p>
+            <p>Write your query <a href="<?= base_url('contact-us?q=dashboard') ?>">here</a> to know more our services.</p>
         </div>
         <div class="col-md-5 order-md-1">
             <img class="tile-img" src="<?= base_url('/assets/images/firstpage-img-1.png') ?>" alt="income-tax-filling" />

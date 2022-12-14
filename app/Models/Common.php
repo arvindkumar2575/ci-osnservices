@@ -35,9 +35,20 @@ class Common extends Model
         $result=null;
         if(isset($table)){
             $query = $this->db->table($table)->where($key,$value)->get();
-            // echo $this->db->lastQuery;die();
             $result = $query->getRowArray();
-            // echo var_dump($result);die();
+        }
+        return $result;
+    }
+
+    public function get_user_login($username=null, $password=null)
+    {
+        $result=null;
+        if(isset($username) && isset($password)){
+            $qry = 'SELECT * FROM users WHERE username="'.$username.'" AND password="'.$password.'"';
+            $query = $this->db->query($qry);
+            $result = $query->getRowArray();
+            // echo $this->db->lastQuery;die();
+            // echo"<pre>"; var_dump($result);die();
         }
         return $result;
     }
