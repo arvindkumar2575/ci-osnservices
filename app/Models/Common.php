@@ -45,6 +45,7 @@ class Common extends Model
         $result=null;
         if(isset($username) && isset($password)){
             $qry = 'SELECT * FROM users WHERE username="'.$username.'" AND password="'.$password.'"';
+            // echo $qry;die;
             $query = $this->db->query($qry);
             $result = $query->getRowArray();
             // echo $this->db->lastQuery;die();

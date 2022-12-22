@@ -43,6 +43,8 @@ $routes->get('login', 'User::index');
 $routes->get('logout', 'User::logout');
 $routes->get('dashboard', 'User::dashboard');
 
+$routes->get('dashboard/excel-play', 'ExcelPlay::index');
+
 
 $routes->post('api/form-submit', 'Home::contactFormSubmit');
 $routes->get('api/login', 'User::userLogin');

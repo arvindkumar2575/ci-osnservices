@@ -20,7 +20,7 @@ class User extends BaseController
     public function index()
     {
         if(checkSession()){
-            return redirect()->to("/user/dashboard");
+            return redirect()->to("dashboard");
         }else{
             $data=array();
             $data['page']="login";
@@ -57,6 +57,7 @@ class User extends BaseController
     private function userValidate($username,$password)
     {
         $user_data = $this->common->get_user_login($username,md5($password));
+        // echo '<pre>';var_dump($user_data);die;
         if(isset($user_data) && !empty($user_data) && $user_data["username"]==$username){
             $usersession = array(
                 'id'=>$user_data['id'],
@@ -79,7 +80,7 @@ class User extends BaseController
     {
         // echo "<pre>";print_r(session("usersession"));
         if(!checkSession()){
-            return redirect()->to("user/login"); 
+            return redirect()->to("login"); 
         }else{
             $data=array();
             $data['page']="dashboard";
