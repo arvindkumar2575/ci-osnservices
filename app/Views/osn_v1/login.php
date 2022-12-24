@@ -8,8 +8,7 @@
                     <img width="200" src="<?= base_url("/assets/images/avatar-img.png") ?>" alt="img" />
                 </div>
                 <div class="col-sm-12 col-md-6 right row">
-                    <div class="login-form-title">
-                    </div>
+                    <div class="login-form-title"></div>
                     <div class="form-group">
                         <label for="inputUsername">Username</label>
                         <input id="inputUsername" class="form-control" type="text" name="username" />

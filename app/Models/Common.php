@@ -21,11 +21,14 @@ class Common extends Model
         
     }
 
-    public function data_single_update($table=null, $key=null, $value=null)
+    public function data_single_update($table=null, $key=null, $value=null, $data=array())
     {
         $update=null;
         if(isset($table)){
-            $query = $this->db->table($table)->where($key,$value);
+            $builder = $this->db->table($table);
+            $builder->where($key,$value);
+            $update=$builder->update($data);
+            // echo $this->db->lastQuery;die();
         }
         return $update;
     }

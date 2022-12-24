@@ -13,6 +13,10 @@ class GDriveVideos
             'Basic Excel'=>[
                 'v1'=>'1X5xSYAxiK8btNeB9ZznJqBUkQNcF8_Bo',
                 'v2'=>'1OFy_yN2bGhztElrs3jdFGgQi7E-fMauG',
+            ],
+            'Advance Excel'=>[
+                'v1'=>'1X5xSYAxiK8btNeB9ZznJqBUkQNcF8_Bo',
+                'v2'=>'1OFy_yN2bGhztElrs3jdFGgQi7E-fMauG',
             ]
         ],
     ];

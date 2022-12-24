@@ -11,7 +11,15 @@ body {
 .navbar-brand,.nav-link{
     font-weight: 500;
 }
-
+.nav-container{
+    padding: 0;
+}
+button.login-btn-osn{
+    color: #fff;
+    padding: 6px 25px;
+    border-radius: 5px;
+    font-weight: 500;
+}
 
 /* Carousel base class */
 .carousel {
@@ -26,6 +34,98 @@ body {
 .carousel-item {
     height: 32rem;
 }
+
+.container.product{
+    padding-left: 0;
+    padding-right: 0;
+}
+.product-cards{
+    margin: 0;
+}
+.product-cards .product-card:nth-child(even){
+    padding-left: 16px;
+}
+.product-card{
+    padding: 8px 0px;
+}
+.product-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #eee;
+    border-radius: 10px;
+    height: 100%;
+}
+.first-sec{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 1rem 0.5rem 1rem;
+}
+.product-img{
+    position: relative;
+}
+.product-img img{
+    /* position: absolute; */
+    max-width: 100px;
+    right: 0;
+    top: 0;
+}
+.product-title{
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+.product-bottom-sec{
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    border-top: 2px solid #dfdfdf;
+}
+.product-price{
+    display: flex;
+}
+.startsat{
+    padding-right: 8px;
+}
+.product-btn{
+    padding-left: 10px;
+}
+.product-btn a{
+    text-decoration: none;
+}
+.product-btn a:hover{
+    color: #000;
+}
+.btn-orange{
+    background-color: #e69500;
+}
+.btn-orange:hover{
+    background-color: #ffa500;
+}
+.btn-buy-now{
+    padding: 2px 15px;
+}
+.product-video-heading{
+    text-decoration: underline;
+}
+.product-desc-video-list{
+    font-size: 14px;
+}
+.product-video-dropdown{
+    font-size: 12px;
+}
+.product-video-dropdown-menu{
+    cursor: pointer;
+    margin: 3px 0;
+}
+.product-video-dropdown ul{
+    margin-bottom: 5px;
+    display: none;
+}
+.product-video-dropdown ul.open{
+    display: block;
+}
+
+
 
 
 /* feature  */
@@ -175,4 +275,9 @@ hr{
     }
 
     
+}
+@media (max-width: 575px) {
+    .product-cards .product-card:nth-child(even) {
+        padding-left: 0;
+    }
 }

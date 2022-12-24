@@ -1,6 +1,6 @@
 <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <div class="container">
+        <div class="container nav-container">
             <a class="navbar-brand" href="<?= base_url() ?>">OSN Services</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -17,6 +17,9 @@
                         <a class="nav-link <?=$page=='contact-us'?'active':''?>" href="<?= base_url('contact-us') ?>">Contact Us</a>
                     </li>
                 </ul>
+                <a href="<?=base_url('login')?>">
+                    <button class="btn btn-primary login-btn-osn" type="button">LogIn</button>
+                </a>
             </div>
         </div>
     </nav>

@@ -22,14 +22,14 @@ body {
     margin: 0 auto;
     /* width: 600px; */
 }
-form.user-login-form{
+form.user-login-form, form.user-register-form{
     width: 100%;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-form.user-login-form .main-section{
+form.user-login-form .main-section, form.user-register-form .main-section{
     display: flex;
     justify-content: space-between;
     width: 800px;
@@ -50,6 +50,13 @@ form.user-login-form .main-section{
     position: relative;
 }
 
+.navbar-brand{
+    width: 100%;
+    border-bottom: 1px solid;
+    margin: 0!important;
+    padding: 0.2rem 1.5rem;
+}
+
 .sidebar{
     position: fixed;
     top: 0;
@@ -58,7 +65,7 @@ form.user-login-form .main-section{
     width: 250px;
     height: 100vh;
     overflow-y: auto;
-    background: #f8f9fa;
+    background: #d7d7d7;
     transition: 0.5s;
     z-index: 999;
 }
@@ -66,13 +73,18 @@ form.user-login-form .main-section{
 .sidebar .navbar-nav{
     padding: 0 15px;
 }
+.sidebar .navbar {
+    background-color: #d7d7d7!important;
+}
 
 .content {
     margin-left: 250px;
     min-height: 100vh;
     background: #FFFFFF;
     transition: 0.5s;
+    z-index: 10;
 }
+
 
 .content .navbar .sidebar-toggler, .content .navbar .navbar-nav .nav-link i {
     width: 40px;
@@ -97,6 +109,40 @@ form.user-login-form .main-section{
 .dropdown-menu{
     margin: 0;
     padding: 0;
+}
+
+.pointer{
+    cursor: pointer;
+}
+.dropdown-sidebar-menu{
+    display: none;
+}
+.dropdown-sidebar-menu.open{
+    display: block;
+}
+.dropdown-sidebar-menu-item{
+    margin: 4px 0 4px 10px;
+}
+.dropdown-sidebar-item{
+    padding: 0;
+    margin: 5px 0;
+    background-color: #d7d7d7;
+    border-radius: 50px 0 0 50px;
+}
+.dropdown-sidebar-menu-item{
+    border-radius: 50px 0 0 50px;
+}
+.dropdown-sidebar-item.active,.dropdown-sidebar-menu-item.active{
+    background-color: #f8f9fa;
+}
+.dropdown-sidebar i.fa{
+    width: 25px;
+    height: 25px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFFFFF;
+    border-radius: 40px;
 }
 
 
@@ -125,7 +171,7 @@ form.user-login-form .main-section{
 }
 
 @media (max-width: 540px){
-    form.user-login-form .main-section .left{
+    form.user-login-form .main-section .left, form.user-register-form .main-section .left{
         display: none;
     }
 }

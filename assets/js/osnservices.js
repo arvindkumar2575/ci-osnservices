@@ -97,6 +97,11 @@ $(document).ready(function() {
             console.log(err)
         })
     })
+
+    $('.product-video-dropdown-menu').on('click',function(){
+        $(this).parent().find('ul').toggleClass('open')
+    })
+
 });
 
 app.contactFormSelector = (q=null) => {

@@ -36,12 +36,15 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
-$routes->get('/about-us', 'Home::aboutUs');
-$routes->get('/contact-us', 'Home::contactUs');
+$routes->get('about-us', 'Home::aboutUs');
+$routes->get('contact-us', 'Home::contactUs');
 
 $routes->get('login', 'User::index');
+$routes->get('register', 'User::register');
 $routes->get('logout', 'User::logout');
+$routes->get('verification', 'User::verification');
 $routes->get('dashboard', 'User::dashboard');
+$routes->get('dashboard/profile', 'User::profile');
 
 $routes->get('dashboard/excel-play', 'ExcelPlay::index');
 
