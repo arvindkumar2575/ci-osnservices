@@ -20,6 +20,8 @@ class Home extends BaseController
     {
         $data=array();
         $data['page']="home";
+        $data['excel_play_config'] = $this->settings->get_settings_single_row('excel_play')['value'];
+        // echo '<pre>';print_r($data);die;
         return view(OSNSERVICES_VIEWPATH.'/index',$data);
     }
 
@@ -29,7 +31,7 @@ class Home extends BaseController
         $data['page']="about-us";
         $data['title']="About Us";
         $data['header_desc']="";
-
+        $data['excel_play_config'] = $this->settings->get_settings_single_row('excel_play')['value'];
         return view(OSNSERVICES_VIEWPATH.'/about-us',$data);
     }
 
@@ -38,6 +40,7 @@ class Home extends BaseController
         $data=array();
         $data['page']="contact-us";
         $data['title']="Contact Us";
+        $data['excel_play_config'] = $this->settings->get_settings_single_row('excel_play')['value'];
         $data['header_desc']="Fill below forms as per your reason of contact.";
 
         return view(OSNSERVICES_VIEWPATH.'/contact-us',$data);

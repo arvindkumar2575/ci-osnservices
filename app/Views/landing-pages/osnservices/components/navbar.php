@@ -17,9 +17,15 @@
                         <a class="nav-link <?=$page=='contact-us'?'active':''?>" href="<?= base_url('contact-us') ?>">Contact Us</a>
                     </li>
                 </ul>
+                <?php
+                if(isset($excel_play_config) && !empty($excel_play_config) && $excel_play_config=='true'){
+                ?>
                 <a href="<?=base_url('login')?>">
                     <button class="btn btn-primary login-btn-osn" type="button">LogIn</button>
                 </a>
+                <?php
+                }
+                ?>
             </div>
         </div>
     </nav>

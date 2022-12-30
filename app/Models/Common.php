@@ -8,6 +8,18 @@ class Common extends Model
         $this->db = \Config\Database::connect();
     }
 
+    public function data_insert_batch($table=null, array $data=null)
+    {
+        $rows=false;
+        if(isset($table)){
+            $rows = $this->db->table($table)->insertBatch($data);
+            return $rows;
+        }else{
+            return $rows;
+        }
+        
+    }
+
     public function data_insert($table=null, array $data=null)
     {
         $query=false;

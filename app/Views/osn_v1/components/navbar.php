@@ -10,7 +10,7 @@
             </a>
             <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                 <a href="<?=base_url('/dashboard/profile')?>" class="dropdown-item">My Profile</a>
-                <a href="<?=base_url('/dashboard/settings')?>" class="dropdown-item">Settings</a>
+                <?php /* <a href="<?=base_url('/dashboard/settings')?>" class="dropdown-item">Settings</a> */?>
                 <a href="<?=base_url('/logout')?>" class="dropdown-item">Log Out</a>
             </div>
         </div>

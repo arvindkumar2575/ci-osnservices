@@ -22,7 +22,7 @@
             <p>Write your query <a href="<?= base_url('contact-us?q=gst-registration') ?>">here</a> to know more our services.</p>
         </div>
         <div class="col-md-5">
-            <img class="tile-img" src="<?= base_url('/assets/images/firstpage-img-3.png') ?>" alt="income-tax-filling" />
+            <img class="tile-img" src="<?= base_url('/assets/images/gst-registration-img.png') ?>" alt="income-tax-filling" />
         </div>
     </div>
 </div>

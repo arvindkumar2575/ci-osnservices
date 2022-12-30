@@ -52,6 +52,8 @@ $routes->get('dashboard/excel-play', 'ExcelPlay::index');
 $routes->post('api/form-submit', 'Home::contactFormSubmit');
 $routes->get('api/login', 'User::userLogin');
 
+$routes->get('api/youtube/runyt', 'ExcelPlay::runyt');
+
 
 
 

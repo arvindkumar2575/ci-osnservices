@@ -98,6 +98,8 @@ $(document).ready(function() {
         $(this).toggleClass('active').parent().find('.dropdown-sidebar-menu').toggleClass('open')
     })
     $('.dropdown-sidebar-menu-item').click(function(){
+        console.log($('.dropdown-sidebar-menu-item'))
+        $('.dropdown-sidebar-menu-item').removeClass('active')
         $(this).addClass("active").siblings().removeClass('active')
     })
 

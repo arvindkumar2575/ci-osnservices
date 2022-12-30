@@ -2,6 +2,21 @@ let app = {};
 
 let url = window.location.href;
 
+const dobj = {
+    q:['itr-filing','gst-registration','dashboard','accounting','new-customer'],
+    map:{
+        'itr-filing':'ITR Filing',
+        'gst-registration':'GST Registration Query',
+        'dashboard':'Dashboard Query',
+        'accounting':'Accounting Query',
+        'new-customer':'New Customer'
+    },
+    unmapped:{
+        'new-referral':'Referral',
+        'itr-information':'Information regarding ITR',
+    }
+}
+
 
 
 
@@ -12,7 +27,7 @@ $(document).ready(function() {
     if(url.indexOf("contact-us") > -1) {
         let urlParams = new URLSearchParams(window.location.search);
         let q = urlParams.has("q")?urlParams.get("q"):""
-        if(q===""){
+        if(q==""){
             app.contactFormSelector();
         }else{
             app.contactFormSelector(q);
@@ -114,6 +129,10 @@ app.contactFormSelector = (q=null) => {
             select.val("ITR Filing").change();
         }else if(q=="dashboard"){
             select.val("Dashboard Query").change();
+        }else if(q=="gst-registration"){
+            select.val("GST Registration Query").change();
+        }else if(q=="accounting"){
+            select.val("Accounting Query").change();
         }
     }else{
         if (x == '') {
@@ -137,7 +156,15 @@ app.contactFormSelector = (q=null) => {
         }else if (x == 'Dashboard Query') {
             document.getElementById("message-div").style.display = 'flex';
             document.getElementById("itr-info-div").style.display = 'none';
-            app.changePlaceholder("Write the query regarding your dashboard")
+            app.changePlaceholder("Write the query regarding your dashboard i.e, some points of dashboard features that you want")
+        }else if (x == 'GST Registration Query') {
+            document.getElementById("message-div").style.display = 'flex';
+            document.getElementById("itr-info-div").style.display = 'none';
+            app.changePlaceholder("Write the query regarding gst registration & provide details of your business")
+        }else if (x == 'Accounting Query') {
+            document.getElementById("message-div").style.display = 'flex';
+            document.getElementById("itr-info-div").style.display = 'none';
+            app.changePlaceholder("Write the query regarding accounting work & provide details of your business")
         }
     }
 }
