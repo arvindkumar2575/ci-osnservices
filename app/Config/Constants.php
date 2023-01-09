@@ -94,6 +94,7 @@ define('EVENT_PRIORITY_NORMAL', 100);
 define('EVENT_PRIORITY_HIGH', 10);
 
 
+define('EXCEL_PLAY_ENABLED',true);
 
 define('LANDING_PAGES_VIEWPATH', 'landing-pages');
 define('COMMON_VIEWPATH', 'common');
