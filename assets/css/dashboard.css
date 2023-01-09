@@ -1,0 +1,186 @@
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap');
+
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: #000;
+}
+
+/* login form class  */
+/* .login-form{
+    width: 100%;
+    margin: 0 auto;
+} */
+/* .login-form .form-div{
+    width: 100%;
+    min-height: 100vh;
+} */
+.form-div form{
+    margin: 0 auto;
+    /* width: 600px; */
+}
+form.user-login-form, form.user-register-form{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+form.user-login-form .main-section, form.user-register-form .main-section{
+    display: flex;
+    justify-content: space-between;
+    width: 800px;
+    background-color: #eee;
+    padding: 50px 30px;
+    border-radius: 8px;
+}
+
+
+
+/* field error  */
+.field-focus-error{
+    border: 1px solid #f00;
+    box-shadow: 0 0 0.1rem 0.25rem #f00
+}
+
+.main-body{
+    position: relative;
+}
+
+.navbar-brand{
+    width: 100%;
+    border-bottom: 1px solid;
+    margin: 0!important;
+    padding: 0.2rem 1.5rem;
+}
+
+.sidebar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 250px;
+    height: 100vh;
+    overflow-y: auto;
+    background: #d7d7d7;
+    transition: 0.5s;
+    z-index: 999;
+}
+
+.sidebar .navbar-nav{
+    padding: 0 15px;
+}
+.sidebar .navbar {
+    background-color: #d7d7d7!important;
+}
+
+.content {
+    margin-left: 250px;
+    min-height: 100vh;
+    background: #FFFFFF;
+    transition: 0.5s;
+    z-index: 10;
+}
+
+
+.content .navbar .sidebar-toggler, .content .navbar .navbar-nav .nav-link i {
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFFFFF;
+    border-radius: 40px;
+}
+
+.sidebar .navbar .navbar-nav .nav-link i {
+    width: 25px;
+    height: 25px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFFFFF;
+    border-radius: 40px;
+}
+
+.dropdown-menu{
+    margin: 0;
+    padding: 0;
+}
+
+.pointer{
+    cursor: pointer;
+}
+.navbar .navbar-nav .dropdown-sidebar{
+    margin-top: 5px;
+}
+.dropdown-sidebar-menu{
+    display: none;
+}
+.dropdown-sidebar-menu.open{
+    display: block;
+}
+.dropdown-sidebar-menu-item{
+    margin: 5px 0 5px 10px;
+}
+.dropdown-sidebar-item{
+    padding: 0;
+    margin: 5px 0;
+    background-color: #d7d7d7;
+    border-radius: 4px;
+}
+.dropdown-sidebar-menu-item{
+    border-radius: 4px;
+}
+.dropdown-sidebar-item.active,.dropdown-sidebar-menu-item.active{
+    background-color: #f8f9fa;
+}
+.dropdown-sidebar i.fa{
+    width: 25px;
+    height: 25px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFFFFF;
+    border-radius: 40px;
+}
+.free-excel-heading h4{
+    margin: 0;
+    padding-left: 15px;
+}
+
+
+.add-video{
+    margin: 20px 0;
+}
+
+
+
+
+
+
+
+
+
+
+@media (min-width: 992px){
+    .sidebar.open {
+        margin-left: -250px;
+    }
+    .content {
+        width: calc(100% - 250px);
+    }
+    .content.open {
+        width: 100%;
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 540px){
+    form.user-login-form .main-section .left, form.user-register-form .main-section .left{
+        display: none;
+    }
+}

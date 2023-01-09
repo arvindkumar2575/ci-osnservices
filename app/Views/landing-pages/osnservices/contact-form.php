@@ -26,10 +26,12 @@
                     <select style="margin-top:20px" class="form-control" name="Option-1" onchange="app.contactFormSelector()" id="option-1">
                         <option value="">----select----</option>
                         <option value="New Customer">New Customer</option>
-                        <option value="Information regarding ITR">Information regarding ITR</option>
-                        <option value="ITR Filing">ITR Filing</option>
                         <option value="Referral">Referral</option>
+                        <option value="ITR Filing">ITR Filing</option>
+                        <option value="Accounting Query">Accounting Query</option>
                         <option value="Dashboard Query">Dashboard Query</option>
+                        <option value="GST Registration Query">GST Registration Query</option>
+                        <option value="Information regarding ITR">Information regarding ITR</option>
                         <?php /*<option value="Document Attachment">Document Attachment</option>*/?>
                     </select>
                 </div>

@@ -36,11 +36,33 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
-$routes->get('/about-us', 'Home::aboutUs');
-$routes->get('/contact-us', 'Home::contactUs');
+$routes->get('about-us', 'Home::aboutUs');
+$routes->get('contact-us', 'Home::contactUs');
+
+$routes->post('api/form-submit', 'Home::contactFormSubmit');
+
+if(EXCEL_PLAY_ENABLED){
+    $routes->get('login', 'User::index');
+    $routes->get('register', 'User::register');
+    $routes->get('logout', 'User::logout');
+    $routes->get('verification', 'User::verification');
+    $routes->get('dashboard', 'User::dashboard');
+    $routes->get('dashboard/profile', 'User::profile');
+    
+    
+    $routes->get('excel-play', 'ExcelPlay::freeExcelPlay');
+    $routes->get('dashboard/excel-play', 'ExcelPlay::index');
+    
+    
+    $routes->get('api/login', 'User::userLogin');
+    $routes->post('api/regiser', 'User::userLogin');
+    $routes->post('api/add-video', 'User::addVideoForm');
+}
+
+// $routes->get('api/youtube/runyt', 'ExcelPlay::runyt');
 
 
-$routes->post('/form-submit', 'Home::contactFormSubmit');
+
 
 /*
  * --------------------------------------------------------------------

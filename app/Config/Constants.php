@@ -94,6 +94,19 @@ define('EVENT_PRIORITY_NORMAL', 100);
 define('EVENT_PRIORITY_HIGH', 10);
 
 
+define('EXCEL_PLAY_ENABLED',true);
 
 define('LANDING_PAGES_VIEWPATH', 'landing-pages');
+define('COMMON_VIEWPATH', 'common');
 define('OSNSERVICES_VIEWPATH', LANDING_PAGES_VIEWPATH.'/osnservices');
+
+define('OSN_VIEWPATH', 'osn_v1');
+
+define('OSN_COMPONENTS_VIEWPATH', OSN_VIEWPATH.'/components');
+
+define('EXCELPLAY_VIEWPATH', 'osn_v1/excel-play');
+
+define('excel_play', 'Excel Play');
+define('basic_excel', 'Basic Excel');
+
+

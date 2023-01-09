@@ -8,6 +8,18 @@ class Common extends Model
         $this->db = \Config\Database::connect();
     }
 
+    public function data_insert_batch($table=null, array $data=null)
+    {
+        $rows=false;
+        if(isset($table)){
+            $rows = $this->db->table($table)->insertBatch($data);
+            return $rows;
+        }else{
+            return $rows;
+        }
+        
+    }
+
     public function data_insert($table=null, array $data=null)
     {
         $query=false;
@@ -21,11 +33,25 @@ class Common extends Model
         
     }
 
-    public function data_single_update($table=null, $key=null, $value=null)
+    public function data_update($table=null, array $where=array(), array $data=array())
+    {
+        $query=false;
+        if(isset($table)){
+            $query = $this->db->table($table)->update($data,$where);
+            // echo $this->db->lastQuery;die();
+        }
+        return $query;
+        
+    }
+
+    public function data_single_update($table=null, $key=null, $value=null, $data=array())
     {
         $update=null;
         if(isset($table)){
-            $query = $this->db->table($table)->where($key,$value);
+            $builder = $this->db->table($table);
+            $builder->where($key,$value);
+            $update=$builder->update($data);
+            // echo $this->db->lastQuery;die();
         }
         return $update;
     }
@@ -35,9 +61,31 @@ class Common extends Model
         $result=null;
         if(isset($table)){
             $query = $this->db->table($table)->where($key,$value)->get();
-            // echo $this->db->lastQuery;die();
             $result = $query->getRowArray();
-            // echo var_dump($result);die();
+        }
+        return $result;
+    }
+
+    public function get_multiple_row($table=null, $key=null, $value=null)
+    {
+        $result=null;
+        if(isset($table)){
+            $query = $this->db->table($table)->where($key,$value)->get();
+            $result = $query->getResultArray();
+        }
+        return $result;
+    }
+
+    public function get_user_login($username=null, $password=null)
+    {
+        $result=null;
+        if(isset($username) && isset($password)){
+            $qry = 'SELECT * FROM users WHERE username="'.$username.'" AND password="'.$password.'"';
+            // echo $qry;die;
+            $query = $this->db->query($qry);
+            $result = $query->getRowArray();
+            // echo $this->db->lastQuery;die();
+            // echo"<pre>"; var_dump($result);die();
         }
         return $result;
     }

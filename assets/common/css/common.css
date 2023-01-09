@@ -1,0 +1,39 @@
+
+footer.footer{
+    background: #434343;
+    color: #fff;
+}
+footer.footer .content{
+    padding: 1.5rem 0;
+}
+
+
+.short-popup-msg{
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-top: 30vh;
+    height: 100vh;
+}
+.popup-box{
+    position: relative;
+    overflow: hidden;
+    width: 280px;
+    margin: 0 auto;
+    background-color: #fff;
+    text-align: center;
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 20px 1px #add8e6;
+    color: #000;
+}
+.popup-msg-progressbar{
+    width: 0%;
+    background-color: #009100;
+    height: 5px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
