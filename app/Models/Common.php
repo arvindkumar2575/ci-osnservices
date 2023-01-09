@@ -33,6 +33,17 @@ class Common extends Model
         
     }
 
+    public function data_update($table=null, array $where=array(), array $data=array())
+    {
+        $query=false;
+        if(isset($table)){
+            $query = $this->db->table($table)->update($data,$where);
+            // echo $this->db->lastQuery;die();
+        }
+        return $query;
+        
+    }
+
     public function data_single_update($table=null, $key=null, $value=null, $data=array())
     {
         $update=null;
@@ -51,6 +62,16 @@ class Common extends Model
         if(isset($table)){
             $query = $this->db->table($table)->where($key,$value)->get();
             $result = $query->getRowArray();
+        }
+        return $result;
+    }
+
+    public function get_multiple_row($table=null, $key=null, $value=null)
+    {
+        $result=null;
+        if(isset($table)){
+            $query = $this->db->table($table)->where($key,$value)->get();
+            $result = $query->getResultArray();
         }
         return $result;
     }

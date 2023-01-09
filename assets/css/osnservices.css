@@ -61,6 +61,9 @@ button.login-btn-osn{
     justify-content: space-between;
     padding: 1rem 1rem 0.5rem 1rem;
 }
+.first-sec .product-details{
+    padding-right: 10px;
+}
 .product-img{
     position: relative;
 }
@@ -80,11 +83,14 @@ button.login-btn-osn{
     padding: 0.5rem 1rem 0.5rem 1rem;
     border-top: 2px solid #dfdfdf;
 }
+.product-bottom-sec .cr-plan{
+    font-weight: 500;
+}
 .product-price{
     display: flex;
 }
 .startsat{
-    padding-right: 8px;
+    /* padding-right: 8px; */
 }
 .product-btn{
     padding-left: 10px;
@@ -93,7 +99,7 @@ button.login-btn-osn{
     text-decoration: none;
 }
 .product-btn a:hover{
-    color: #000;
+    color: #fff;
 }
 .btn-orange{
     background-color: #e69500;
@@ -103,12 +109,16 @@ button.login-btn-osn{
 }
 .btn-buy-now{
     padding: 2px 15px;
+    color: #fff;
 }
 .product-video-heading{
     text-decoration: underline;
 }
 .product-desc-video-list{
     font-size: 14px;
+}
+.product-desc-video-list p{
+    margin-bottom: 0;
 }
 .product-video-dropdown{
     font-size: 12px;
@@ -230,6 +240,10 @@ hr{
 }
 
 
+
+.pa-redirect{
+    text-decoration: none;
+}
 
 
 

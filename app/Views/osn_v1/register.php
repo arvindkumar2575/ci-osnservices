@@ -10,20 +10,20 @@
                 <div class="col-sm-12 col-md-6 right row">
                     <div class="login-form-title"></div>
                     <div class="row form-group">
-                        <div class="col-sm-6">
+                        <div class="col-sm-6 mb-2">
                             <label for="inputFirstname">First Name</label>
                             <input id="inputFirstname" class="form-control" type="text" name="first_name" />
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-6 mb-2">
                             <label for="inputLastname">Last Name</label>
                             <input id="inputLastname" class="form-control" type="text" name="last_name" />
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-2">
                         <label for="inputUsername">Username</label>
                         <input id="inputUsername" class="form-control" type="text" name="username" />
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-2">
                         <label for="inputPassword">Password</label>
                         <input id="inputPassword" class="form-control" type="password" name="password" />
                     </div>

@@ -18,7 +18,16 @@
                     </li>
                 </ul>
                 <?php
-                if(isset($excel_play_config) && !empty($excel_play_config) && $excel_play_config=='true'){
+                $session = session();
+                $usersession = $session->get('usersession');
+                if(isset($usersession['isLoggedIn']) && $usersession['isLoggedIn']){
+                ?>
+                <a href="<?=base_url('dashboard')?>">
+                    <button class="btn btn-primary login-btn-osn" type="button">Dashboard</button>
+                </a>
+                
+                <?php
+                }else if(isset($login_cta) && !empty($login_cta) && $login_cta=='true'){
                 ?>
                 <a href="<?=base_url('login')?>">
                     <button class="btn btn-primary login-btn-osn" type="button">LogIn</button>

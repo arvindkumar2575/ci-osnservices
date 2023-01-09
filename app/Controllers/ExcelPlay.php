@@ -4,21 +4,34 @@ namespace App\Controllers;
 
 use App\Models\Common;
 use App\Models\Settings;
+use App\Models\VideoModel;
 use DateTime;
 use Config\GDriveVideos;
 use Config\YouTubeAPI;
 
 class ExcelPlay extends BaseController
 {
+    protected $session;
     protected $settings;
     protected $common;
+    protected $videoModel;
     public function __construct()
     {
         $this->session = session();
         $this->settings = new Settings();
         $this->common = new Common();
-        $this->videoConfig = new GDriveVideos;
+        $this->videoModel = new VideoModel();
 
+    }
+
+    public function freeExcelPlay()
+    {
+        $data=array();
+        $data['title']="Excel Play - Free";
+        $data['page']="free-excel-play";
+        $data['videoList']=$this->getVideos();
+        // echo '<pre>';print_r($data);die;
+        return view(EXCELPLAY_VIEWPATH.'/free-excel-play',$data);
     }
 
     public function index()
@@ -27,9 +40,9 @@ class ExcelPlay extends BaseController
             return redirect()->to("login"); 
         }else{
             $data=array();
+            $data['title']="Excel Play";
             $data['page']="excel-play";
-            $data['videoURL']=$this->videoConfig->url;
-            $data['videoList']=$this->videoConfig->playlistIds['excel_play'];
+            $data['videoList']=$this->getVideos();
             $data['user'] = $this->common->get_single_row("users", "id", session("usersession")["id"]);
             // echo '<pre>';print_r($data);die;
             return view(EXCELPLAY_VIEWPATH.'/index',$data);
@@ -72,6 +85,23 @@ class ExcelPlay extends BaseController
                 die(json_encode(array('status' => false, 'message' => 'Invalid User!')));
             }
         }
+    }
+
+    private function getVideos()
+    {
+        $videoList = array();
+        $courses = $this->videoModel->get_course_list();
+        $videoList=$courses;
+        foreach ($videoList as $key => $value) {
+            $videos = $this->videoModel->get_video_list($value['id']);
+            $videoList[$key]['videos']=$videos;
+        }
+
+        $misc_video = $this->common->get_multiple_row('videos','course_id',0);
+        if($misc_video){
+            $videoList[count($courses)+1]['videos']=$misc_video;
+        }
+        return $videoList;
     }
 
 }

@@ -1,5 +1,6 @@
 let common = {}
 let cookie = {}
+let validation ={}
 
 
 common.fillProgress = (e) => {
@@ -31,6 +32,17 @@ common.ajaxCall = (url,type,data,onSucces,onError,onComplete)=>{
   $.ajax(r)
 }
 
+common.popup_error = (message)=>{
+  let espace = $('.short-popup-msg')
+  let error = message
+  espace.find('.popup-title').html(error)
+  espace.show()
+  setTimeout(() => {
+      espace.hide()
+      espace.find('.popup-title').html('')
+  }, 2000);
+}
+
 
 
 
@@ -40,4 +52,28 @@ cookie.setCookie = (cName, cValue, expDays)=> {
   date.setTime(date.getTime() + (expDays * 24 * 60 * 60 * 1000));
   const expires = "expires=" + date.toUTCString();
   document.cookie = cName + "=" + cValue + "; " + expires + "; path=/";
+}
+
+
+
+
+// validation 
+validation.email = (email)=>{
+  var emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  if(email==null || email==undefined || email==''){
+      return 'Required email address!';
+  }else if(email.match(emailRegex)){
+      return true;
+  }else{
+      return 'Required valid email!';
+  }
+}
+validation.password = (password)=>{
+  if(password==null || password==undefined || password==''){
+      return 'Required password';
+  }else if(password.length>8 && password.length<20){
+      return true;
+  }else{
+      return 'Password must be of length 8 to 20.';
+  }
 }

@@ -9,11 +9,11 @@
                 </div>
                 <div class="col-sm-12 col-md-6 right row">
                     <div class="login-form-title"></div>
-                    <div class="form-group">
+                    <div class="form-group mb-2">
                         <label for="inputUsername">Username</label>
                         <input id="inputUsername" class="form-control" type="text" name="username" />
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-2">
                         <label for="inputPassword">Password</label>
                         <input id="inputPassword" class="form-control" type="password" name="password" />
                     </div>

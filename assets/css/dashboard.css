@@ -114,6 +114,9 @@ form.user-login-form .main-section, form.user-register-form .main-section{
 .pointer{
     cursor: pointer;
 }
+.navbar .navbar-nav .dropdown-sidebar{
+    margin-top: 5px;
+}
 .dropdown-sidebar-menu{
     display: none;
 }
@@ -121,16 +124,16 @@ form.user-login-form .main-section, form.user-register-form .main-section{
     display: block;
 }
 .dropdown-sidebar-menu-item{
-    margin: 4px 0 4px 10px;
+    margin: 5px 0 5px 10px;
 }
 .dropdown-sidebar-item{
     padding: 0;
     margin: 5px 0;
     background-color: #d7d7d7;
-    border-radius: 50px 0 0 50px;
+    border-radius: 4px;
 }
 .dropdown-sidebar-menu-item{
-    border-radius: 50px 0 0 50px;
+    border-radius: 4px;
 }
 .dropdown-sidebar-item.active,.dropdown-sidebar-menu-item.active{
     background-color: #f8f9fa;
@@ -144,9 +147,15 @@ form.user-login-form .main-section, form.user-register-form .main-section{
     background: #FFFFFF;
     border-radius: 40px;
 }
+.free-excel-heading h4{
+    margin: 0;
+    padding-left: 15px;
+}
 
 
-
+.add-video{
+    margin: 20px 0;
+}
 
 
 

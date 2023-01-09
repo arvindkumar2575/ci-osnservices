@@ -21,6 +21,8 @@ class Home extends BaseController
         $data=array();
         $data['page']="home";
         $data['excel_play_config'] = $this->settings->get_settings_single_row('excel_play')['value'];
+        $data['free_excel_play_config'] = $this->settings->get_settings_single_row('free_excel_play')['value'];
+        $data['login_cta'] = $this->settings->get_settings_single_row('header_nav_login')['value'];
         // echo '<pre>';print_r($data);die;
         return view(OSNSERVICES_VIEWPATH.'/index',$data);
     }
@@ -32,6 +34,8 @@ class Home extends BaseController
         $data['title']="About Us";
         $data['header_desc']="";
         $data['excel_play_config'] = $this->settings->get_settings_single_row('excel_play')['value'];
+        $data['free_excel_play_config'] = $this->settings->get_settings_single_row('free_excel_play')['value'];
+        $data['login_cta'] = $this->settings->get_settings_single_row('header_nav_login')['value'];
         return view(OSNSERVICES_VIEWPATH.'/about-us',$data);
     }
 
@@ -41,6 +45,8 @@ class Home extends BaseController
         $data['page']="contact-us";
         $data['title']="Contact Us";
         $data['excel_play_config'] = $this->settings->get_settings_single_row('excel_play')['value'];
+        $data['free_excel_play_config'] = $this->settings->get_settings_single_row('free_excel_play')['value'];
+        $data['login_cta'] = $this->settings->get_settings_single_row('header_nav_login')['value'];
         $data['header_desc']="Fill below forms as per your reason of contact.";
 
         return view(OSNSERVICES_VIEWPATH.'/contact-us',$data);

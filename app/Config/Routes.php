@@ -46,13 +46,17 @@ $routes->get('verification', 'User::verification');
 $routes->get('dashboard', 'User::dashboard');
 $routes->get('dashboard/profile', 'User::profile');
 
+
+$routes->get('excel-play', 'ExcelPlay::freeExcelPlay');
 $routes->get('dashboard/excel-play', 'ExcelPlay::index');
 
 
 $routes->post('api/form-submit', 'Home::contactFormSubmit');
 $routes->get('api/login', 'User::userLogin');
+$routes->post('api/regiser', 'User::userLogin');
+$routes->post('api/add-video', 'User::addVideoForm');
 
-$routes->get('api/youtube/runyt', 'ExcelPlay::runyt');
+// $routes->get('api/youtube/runyt', 'ExcelPlay::runyt');
 
 
 
