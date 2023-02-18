@@ -77,3 +77,30 @@ validation.password = (password)=>{
       return 'Password must be of length 8 to 20.';
   }
 }
+
+
+common.searchNameEmail = (val)=>{
+  let url = BASE_URL + '/api/search-name-email'
+  data={q:val}
+  common.ajaxCall(url, "GET", data, (res) => {
+
+    if (res.status) {
+        if(res.data.length>0){
+            ls = '';
+            res.data.forEach(e => {
+                ls+=`<li class="ss-list" data-id="`+e.id+`"><span class="user_name">`+e.username+`</span><span>(`+e.first_name+` `+e.last_name+`)</span></li>`
+            });
+            let elm = `<ul class="search-ul-list">`+ls+`</ul>`
+            $('.filter-form .search-list').html(elm)
+            $('.filter-form .search-list').show();
+        }else{
+            $('.filter-form .search-list').hide();
+            $('.filter-form .search-list').html('')
+        }
+    } else {
+        console.log(res)
+    }
+  }, (err) => {
+      console.log(err)
+  })
+}

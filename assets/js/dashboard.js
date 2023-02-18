@@ -2,8 +2,10 @@ let app = {};
 
 let url = window.location.href;
 
+
 // ready function 
 $(document).ready(function () {
+    let urlParams = new URLSearchParams(window.location.search)
 
     $(".user-login-form,.user-register-form").find("input").click(function (e) {
         if ($(this).hasClass("field-focus-error")) {
@@ -33,6 +35,7 @@ $(document).ready(function () {
         data.password = password_elm.val()
 
         data.form_type = $('input[name=form_type]').val()
+        data.request = urlParams.has("request")?urlParams.get("request"):""
 
         let emailValidator = validation.email(data.username);
         let passwordValidator = validation.password(data.password);
@@ -97,7 +100,9 @@ $(document).ready(function () {
         data.password = password_elm.val()
 
         data.form_type = $('input[name=form_type]').val()
-        console.log(data)
+        data.request = urlParams.has("request")?urlParams.get("request"):""
+        
+        // console.log(data)
 
         let emailValidator = validation.email(data.username);
         let passwordValidator = validation.password(data.password);
@@ -128,38 +133,97 @@ $(document).ready(function () {
         }
     })
 
-    $("form#add-video-form").submit(function (e) {
+    $(document).on('click','#user-login-btn',function (e) {
         e.preventDefault()
-        let url = BASE_URL+'/api/add-video'
+        let req = urlParams.get("request");
+        if(req){
+            window.location.href=BASE_URL+'/login?request='+req;
+        }else{
+            window.location.href=BASE_URL+'/login';
+        }
+    })
+    $(document).on('click','#user-register-btn',function (e) {
+        e.preventDefault()
+        let req = urlParams.get("request");
+        if(req){
+            window.location.href=BASE_URL+'/register?request='+req;
+        }else{
+            window.location.href=BASE_URL+'/register';
+        }
+    })
+
+
+
+    let aeform = document.getElementById('ae-form')
+    $(document).on('click','button.admin-btn-add',function(){
         let data = {}
+        data.operation = 'add'
+        data.type=$(this).data('dl')
+        common.ajaxCall(BASE_URL+'/api/fetch-add-edit-form','GET',data,(res)=>{
+            if (res.status) {
+                $(aeform).html(res.data)
+                $(aeform).show()
+            }
+        },(err)=>{
+            console.log(err)
+        })
+    })
+    $(document).on('click','button.admin-btn-edit',function(){
+        let data = {}
+        data.operation = 'edit'
+        data.type=$(this).data('dl')
+        let id = $(this).data('id')
+        data = idspopulate(data,id)
+        // console.log(data)
+        common.ajaxCall(BASE_URL+'/api/fetch-add-edit-form','GET',data,(res)=>{
+            if (res.status) {
+                $(aeform).html(res.data)
+                $(aeform).show()
+            }
+        },(err)=>{
+            console.log(err)
+        })
+    })
 
-        let course_id_elm = $('select[name=course_id]')
-        if (course_id_elm.val() == "") {
-            course_id_elm.addClass("field-focus-error")
-            return false;
+
+    $(document).on('click','button.admin-btn-delete',function(){
+        let url = BASE_URL+'/api/add-edit-delete'
+        let data = {}
+        data.operation = 'delete'
+        data.type=$(this).data('dl')
+        let id = $(this).data('id')
+        data = idspopulate(data,id)
+        // console.log(data)
+        let con = confirm('Are you really want to delete?')
+        if(con){
+            common.ajaxCall(url,'POST',data,(res)=>{
+                if (res.status) {
+                    window.location.href = BASE_URL + '/admin'
+                }
+            },(err)=>{
+                console.log(err)
+            })
         }
-        data.course_id = course_id_elm.val()
+    })
+    $(document).on('click','.close-form',function(){
+        $(aeform).hide()
+    })
+    
 
-        let title_elm = $('input[name=title]')
-        if (title_elm.val() == "") {
-            title_elm.addClass("field-focus-error")
-            return false;
-        }
-        data.title = title_elm.val()
+    $(document).on('submit','form#add-edit-form',function(e){
+        e.preventDefault()
+        let url = BASE_URL+'/api/add-edit-delete'
+        let data = {}
+        data.type = $(document).find("input[name=type]").val();
+        data.operation = $(document).find("input[name=operation]").val();
 
-        let url_elm = $('input[name=url]')
-        if (url_elm.val() == "") {
-            url_elm.addClass("field-focus-error")
-            return false;
-        }
-        data.url = url_elm.val()
+        let form = $(this)
+        data = formDataPopulate(data,form)
+        // console.log(data)
 
-        data.description = $('textarea[name=description]').val()
-        data.form_type = $("input[name=form_type]").val();
-        data.id = $("input[name=id]").val();
         common.ajaxCall(url, "POST", data, (res) => {
             if (res.status) {
-                window.location.href = BASE_URL + '/dashboard'
+                window.location.href = BASE_URL + '/admin'
             }
         }, (err) => {
             console.log(err)
@@ -173,7 +237,145 @@ $(document).ready(function () {
             $('iframe.video-iframe').attr('src',url+video_link)
         }
     })
+
+    // $(document).on('click','.admin-layout .product-row',function(){
+    //     console.log($(this).data('course-id'))
+    // })
+
+
+
+    $(document).on('keyup','input#username',function () {
+        if (this.value.length > 2) {
+            common.searchNameEmail(this.value)
+        } else {
+            $('.filter-form .search-list').hide();
+            $('.filter-form .search-list').html('')
+        }
+    })
+    $(document).mouseup(function (e) {
+        var container = $(document).find("input#name_email");
+        if (!container.is(e.target) && container.has(e.target).length === 0) {
+            $('.filter-form .search-list').hide();
+        }
+    });
+
+    $(document).on('click', '.search-list .ss-list', function (e) {
+        let uid = $(this).data('id')
+        let user_name = $(this).find('.user_name').text()
+        console.log(uid)
+        $('input[name=username]').val(user_name)
+        $('input[name=user_id]').val(uid)
+    })
 });
+
+function formDataPopulate(data,form){
+    // console.log(data,form)
+    switch (data.type) {
+        case 'courses':
+            if(data.operation=='edit'){
+                data.course_id = $(form).find("input[name=course_id]").val()
+            }
+            data.name = $(form).find("input[name=name]").val()
+            data.status = $(form).find("select[name=status]").val()
+            data.url = $(form).find("input[name=url]").val()
+            data.description = $(form).find("textarea[name=description]").val()
+            break;
+        case 'plans':
+            if(data.operation=='edit'){
+                data.plan_id = $(form).find("input[name=plan_id]").val()
+            }
+            data.name = $(form).find("input[name=name]").val()
+            data.status = $(form).find("select[name=status]").val()
+            data.price = $(form).find("input[name=price]").val()
+            data.discount = $(form).find("input[name=discount]").val()
+            data.description = $(form).find("textarea[name=description]").val()
+            break;
+        
+        case 'cpm':
+            data.course_id = $(form).find("select[name=course_name]").val()
+            data.plan_id = $(form).find("select[name=plan_name]").val()
+            break;
+
+        case 'cvm':
+            data.course_id = $(form).find("select[name=course_name]").val()
+            data.video_id = $(form).find("select[name=video_title]").val()
+            break;
+
+        case 'videos':
+            if(data.operation=='edit'){
+                data.video_id = $(form).find("input[name=video_id]").val()
+            }
+            data.url = $(form).find("input[name=url]").val()
+            data.status = $(form).find("select[name=status]").val()
+            data.title = $(form).find("input[name=title]").val()
+            data.description = $(form).find("textarea[name=description]").val()
+            break;
+            
+        case 'users':
+            if(data.operation=='edit'){
+                data.user_id = $(form).find("input[name=user_id]").val()
+            }
+            data.username = $(form).find("input[name=username]").val()
+            data.user_type = $(form).find("input[name=user_type]").val()
+            data.first_name = $(form).find("input[name=first_name]").val()
+            data.last_name = $(form).find("input[name=last_name]").val()
+            data.verified = $(form).find("select[name=verified]").val()
+            data.status = $(form).find("select[name=status]").val()
+            break;
+        case 'ucpm':
+            data.ucpm_id = $(form).find("input[name=ucpm_id]").val()
+            data.user_id = $(form).find("input[name=user_id]").val()
+            data.course_id = $(form).find("select[name=course_name]").val()
+            data.plan_id = $(form).find("select[name=plan_name]").val()
+            data.status = $(form).find("select[name=status]").val()
+            break;
+        default:
+            break;
+    }
+    return data
+}
+
+function idspopulate(data,ids){
+    // console.log(data,ids)
+    switch (data.type) {
+        case 'courses':
+            data.course_id=ids
+            break;
+        case 'plans':
+            data.plan_id=ids
+            break;
+        
+        case 'cpm':
+            ids = ids.split(':')
+            data.course_id=parseInt(ids[0])
+            data.plan_id=parseInt(ids[1])
+            break;
+
+        case 'cvm':
+            ids = ids.split(':')
+            data.course_id=parseInt(ids[0])
+            data.video_id=parseInt(ids[1])
+            break;
+
+        case 'videos':
+            data.video_id=ids
+            break;
+            
+        case 'users':
+            data.user_id=ids
+            break;
+        case 'ucpm':
+            ids = ids.split(':')
+            data.ucpm_id=parseInt(ids[0])
+            data.user_id=parseInt(ids[1])
+            data.plan_id=parseInt(ids[2])
+            data.course_id=parseInt(ids[3])
+            break;
+        default:
+            break;
+    }
+    return data
+}
 
 
 (function ($) {

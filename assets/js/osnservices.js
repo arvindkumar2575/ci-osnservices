@@ -117,6 +117,60 @@ $(document).ready(function() {
         $(this).parent().find('ul').toggleClass('open')
     })
 
+
+    $(document).on('change','select[name=plan_select]',function(e){
+        e.preventDefault();
+        let plan_val = $(this).val()
+        let plan_price = $(this).find(':selected').data('plan-price')
+        let plan_discount = $(this).find(':selected').data('plan-discount')
+        let plan_duration = $(this).find(':selected').data('plan-duration')
+        let elm = $(this).parents('.product-card').find('.product-price')
+        // console.log(elm)
+        
+        if(plan_val != '0'){
+            $(elm).html('')
+            let dis_price = Math.round(((100-plan_discount)/plan_price)*100)
+            let html = `<span>Price: ₹${dis_price}</span>
+            <span class="text-decoration-line-through px-2">₹${plan_price}</span>
+            <span class="">Duration: ${plan_duration==0?'Lifetime':plan_duration+' Months'}</span>`
+            $(elm).html(html)
+        }else{
+            let err = '<span class="plan-error">Please select plan</span>'
+            $(elm).html(err)
+        }
+    })
+
+    $(document).on('click','button.btn-register',function(e){
+        e.preventDefault();
+        let course_id = $(this).data('course-id')
+        let elm = $(document).find('.product-card-'+course_id)
+        let plan = $(elm).find('select[name=plan_select]')
+        let plan_val = $(plan).val()
+        let plan_price = $(plan).find(':selected').data('plan-price')
+        let plan_discount = $(plan).find(':selected').data('plan-discount')
+        let plan_duration = $(plan).find(':selected').data('plan-duration')
+        // console.log(plan_val)
+
+        if(plan_val != '0'){
+            let dis_price = Math.round(((100-plan_discount)/plan_price)*100)
+            let data = {
+                course_id:parseInt(course_id),
+                plan_id:parseInt(plan_val),
+                plan_price:plan_price,
+                plan_discount:plan_discount,
+                plan_duration:plan_duration,
+                plan_discount_price:dis_price,
+                form_type:'Plan_Register',
+            }
+            let jsondata = window.btoa(JSON.stringify(data)) 
+            window.location.href=BASE_URL+'/register?request='+jsondata;
+        }else{
+            let err = '<span class="plan-error">Please select plan</span>'
+            $(elm).find('.product-price').html(err)
+        }
+
+    })
+
 });
 
 app.contactFormSelector = (q=null) => {

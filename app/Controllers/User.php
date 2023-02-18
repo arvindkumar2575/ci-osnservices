@@ -4,7 +4,11 @@ namespace App\Controllers;
 
 use App\Models\Common;
 use App\Models\Settings;
+use ArrayObject;
+use CodeIgniter\HTTP\Message;
 use DateTime;
+
+use function PHPSTORM_META\type;
 
 class User extends BaseController
 {
@@ -20,8 +24,28 @@ class User extends BaseController
 
     public function index()
     {
+        $request_data = $this->request->getVar('request');
+        $req_data = '';
+        if(isset($request_data) && !empty($request_data)){
+            $req_data = json_decode(base64_decode($request_data));
+        }
+
+
         if (checkSession()) {
-            return redirect()->to("dashboard");
+            if(isset($req_data) && !empty($req_data) && isset($req_data->course_id) && isset($req_data->plan_id) && isset(session("usersession")["isLoggedIn"])){
+                $d = array(
+                    'user_id'=>session("usersession")['id'],
+                    'course_id'=>$req_data->course_id,
+                    'plan_id'=>$req_data->plan_id
+                );
+                $c = $this->common->get_multiple_row('user_course_plan_mapping',$d);
+                if(!$c){
+                    $u = $this->common->data_insert('user_course_plan_mapping',$d);
+                }
+                return redirect()->to("dashboard");
+            }else{
+                return redirect()->to("dashboard");
+            }
         } else {
             $data = array();
             $data['page'] = "login";
@@ -30,8 +54,29 @@ class User extends BaseController
     }
     public function register()
     {
+        $request_data = $this->request->getVar('request');
+        $req_data = '';
+        if(isset($request_data) && !empty($request_data)){
+            $req_data = json_decode(base64_decode($request_data));
+        }
+        // echo '<pre>';print_r($req_data);die;
+
+
         if (checkSession()) {
-            return redirect()->to("dashboard");
+            if(isset($req_data) && !empty($req_data) && isset($req_data->course_id) && isset($req_data->plan_id) && isset(session("usersession")["isLoggedIn"])){
+                $d = array(
+                    'user_id'=>session("usersession")['id'],
+                    'course_id'=>$req_data->course_id,
+                    'plan_id'=>$req_data->plan_id
+                );
+                $c = $this->common->get_multiple_row('user_course_plan_mapping',$d);
+                if(!$c){
+                    $u = $this->common->data_insert('user_course_plan_mapping',$d);
+                }
+                return redirect()->to("dashboard");
+            }else{
+                return redirect()->to("dashboard");
+            }
         } else {
             $data = array();
             $data['page'] = "register";
@@ -42,16 +87,34 @@ class User extends BaseController
     public function userLogin()
     {
         $form_type = $this->request->getVar('form_type');
+        $request_data = $this->request->getVar('request');
+        // echo '<pre>';var_dump($request_data);die;
         if ($form_type == 'User_Login_Form') {
             $username = $this->request->getVar('username');
             $password = $this->request->getVar('password');
-            // echo '<pre>';var_dump($username);die;
             if (empty($username) || empty($password)) {
                 $result = array('status' => false, 'message' => 'All fields are required!');
                 return json_encode($result);
             } else {
                 $user_exit = $this->userValidate($username, $password);
                 if ($user_exit) {
+                    if(isset($request_data) && !empty($request_data)){
+                        $req_data = json_decode(base64_decode($request_data));
+                        if(isset($req_data->course_id) && isset($req_data->plan_id)){
+                            $d = array(
+                                'user_id'=>session("usersession")['id'],
+                                'course_id'=>$req_data->course_id,
+                                'plan_id'=>$req_data->plan_id
+                            );
+                            $c = $this->common->get_multiple_row('user_course_plan_mapping',$d);
+                            if(!$c){
+                                $u = $this->common->data_insert('user_course_plan_mapping',$d);
+                            }
+                        }else{
+                            $result = array('status' => false, 'message' => 'Request is incorrect!');
+                            return json_encode($result);
+                        }
+                    }
                     $result = array('status' => true, 'message' => 'You are successfully logged in!');
                     return json_encode($result);
                 } else {
@@ -73,6 +136,20 @@ class User extends BaseController
                 if(!$user_exit){
                     $user_id = $this->userRegister($first_name, $last_name, $username, $password);
                     if ($user_id) {
+                        if(isset($request_data) && !empty($request_data)){
+                            $req_data = json_decode(base64_decode($request_data));
+                            if(isset($req_data->course_id) && isset($req_data->plan_id)){
+                                $d = array(
+                                    'user_id'=>$user_id,
+                                    'course_id'=>$req_data->course_id,
+                                    'plan_id'=>$req_data->plan_id
+                                );
+                                $u = $this->common->data_insert('user_course_plan_mapping',$d);
+                            }else{
+                                $result = array('status' => false, 'message' => 'Request is incorrect!');
+                                return json_encode($result);
+                            }
+                        }
                         $result = array('status' => true, 'message' => 'You have successfully register!<br>You will get email notification within 5hr.','id'=>$user_id);
                         return json_encode($result);
                     } else {
@@ -167,25 +244,18 @@ class User extends BaseController
 
     public function dashboard()
     {
-        // echo "<pre>";print_r(session("usersession"));
-        $video_url = $this->request->getVar('video_url');
         if (!checkSession()) {
             return redirect()->to("login");
         } else {
             $data = array();
             $data['page'] = "dashboard";
             $data['user'] = $this->common->get_single_row("users", "id", session("usersession")["id"]);
-            if($video_url){
-                $video_detail = $this->common->get_single_row("videos", "url", $video_url);
-                if($video_detail){
-                    $data['video'] = $video_detail;
-                }else{
-                    return redirect()->to('dashboard');
-                }
-            }
+            $data['userplans'] = $this->common->getUserCourses($data['user']['id']);
+            // echo '<pre>';print_r($data);die;
             return view(OSN_VIEWPATH . '/dashboard', $data);
         }
     }
+
 
     public function profile()
     {
@@ -200,36 +270,5 @@ class User extends BaseController
         }
     }
 
-    public function addVideoForm()
-    {
-        $id = $this->request->getVar('id');
-        $course_id = $this->request->getVar('course_id');
-        $url = $this->request->getVar('url');
-        $title = $this->request->getVar('title');
-        $description = $this->request->getVar('description');
-        $video_data=array(
-            'course_id' => $course_id,
-            'title' => $title,
-            'description' => $description,
-        );
-        // echo '<pre>';print_r($user_data);die;
-        $video_id=false;
-        if($id){
-            // echo 'aaa<pre>';print_r($video_data);die;
-            $where = array('id'=>$id,'url'=>$url);
-            $video_id = $this->common->data_update('videos', $where, $video_data);
-        }else{
-            $video_data=array_merge($video_data,array('url'=>$url));
-            // echo 'asdf<pre>';print_r($video_data);die;
-            $video_id = $this->common->data_insert('videos',$video_data);
-        }
-        
-        if($video_id){
-            $result = array('status' => true, 'message' => 'Video added successfully!');
-            return json_encode($result);
-        }else{
-            $result = array('status' => false, 'message' => 'Please try again!');
-            return json_encode($result);
-        }
-    }
+    
 }

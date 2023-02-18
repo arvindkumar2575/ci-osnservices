@@ -22,6 +22,7 @@
 
     <!-- bootstrap minified css  -->
     <link href="<?= base_url('assets/common/css/bootstrap.min.css') ?>" rel="stylesheet">
+    <link href="<?= base_url('assets/common/css/select2.min.css') ?>" rel="stylesheet">
     <link href="<?= base_url('assets/common/css/common.css') ?>" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="<?= base_url('assets/css/dashboard.css') ?>" rel="stylesheet">

@@ -84,17 +84,17 @@ class Database extends Config
         // Ensure that we always set the database group to 'tests' if
         // we are currently running an automated test suite, so that
         // we don't overwrite live data on accident.
-        if (ENVIRONMENT === 'development') {
+        if (ENVIRONMENT === 'production') {
             // $this->defaultGroup = 'tests';
-            $this->default['hostname'] = $_SERVER['DEV_DB_HOSTNAME'];
-            $this->default['username'] = $_SERVER['DEV_DB_USERNAME'];
-            $this->default['password'] = $_SERVER['DEV_DB_PASSWORD'];
-            $this->default['database'] = $_SERVER['DEV_DB_NAME'];
-        }else{
             $this->default['hostname'] = $_SERVER['DB_HOSTNAME'];
             $this->default['username'] = $_SERVER['DB_USERNAME'];
             $this->default['password'] = $_SERVER['DB_PASSWORD'];
             $this->default['database'] = $_SERVER['DB_NAME'];
+        }else{
+            $this->default['hostname'] = $_SERVER['DEV_DB_HOSTNAME'];
+            $this->default['username'] = $_SERVER['DEV_DB_USERNAME'];
+            $this->default['password'] = $_SERVER['DEV_DB_PASSWORD'];
+            $this->default['database'] = $_SERVER['DEV_DB_NAME'];
         }
     }
 }

@@ -41,23 +41,33 @@ $routes->get('contact-us', 'Home::contactUs');
 
 $routes->post('api/form-submit', 'Home::contactFormSubmit');
 
-if(EXCEL_PLAY_ENABLED){
+if(FREE_EXCEL_PLAY){
+    $routes->get('excel-play', 'ExcelPlay::freeExcelPlay');
+}
+if(PAID_EXCEL_PLAY){
     $routes->get('login', 'User::index');
     $routes->get('register', 'User::register');
     $routes->get('logout', 'User::logout');
     $routes->get('verification', 'User::verification');
     $routes->get('dashboard', 'User::dashboard');
-    $routes->get('dashboard/profile', 'User::profile');
-    
-    
-    $routes->get('excel-play', 'ExcelPlay::freeExcelPlay');
+    // $routes->get('dashboard/profile', 'User::profile');
     $routes->get('dashboard/excel-play', 'ExcelPlay::index');
     
     
     $routes->get('api/login', 'User::userLogin');
     $routes->post('api/regiser', 'User::userLogin');
-    $routes->post('api/add-video', 'User::addVideoForm');
+    $routes->post('api/plan-register', 'User::register');
 }
+if(ADMIN_PANEL){
+    $routes->get('admin', 'Admin::admin');
+    $routes->get('api/search-name-email', 'Admin::searchNameEmail');
+
+    $routes->get('api/fetch-add-edit-form', 'Admin::fetchAddEditForm');
+    $routes->post('api/fetch-add-edit-form', 'Admin::fetchAddEditForm');
+    
+    $routes->post('api/add-edit-delete', 'Admin::addEditDeleteFormData');
+}
+
 
 // $routes->get('api/youtube/runyt', 'ExcelPlay::runyt');
 
