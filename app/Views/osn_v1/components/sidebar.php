@@ -23,12 +23,10 @@
             
             <?php
             foreach ($videoList as $key => $value) {
-                if(count($value['videos'])<1){
-
-                }else{
+                if(count($value['videos'])>0){
                 ?>
                 <div class="dropdown-sidebar">
-                    <div class="nav-link-sb dropdown-sidebar-item pointer"><i class="fa fa-laptop me-2"></i><?=$value['name']?></div>
+                    <div class="nav-link-sb dropdown-sidebar-item pointer"><i class="fa fa-laptop me-2"></i><?=$value['course_name']?></div>
                     <div class="dropdown-sidebar-menu bg-transparent border-0 pointer">
                         <?php
                         foreach ($value['videos'] as $key1 => $value1) {

@@ -31,6 +31,9 @@
                     <div>
                         <button type="submit" id="user-register-form-success" class="btn btn-primary user-register-form-btn">Register</button>
                     </div>
+                    <div>
+                        <a href="javascript:void(0)" class="user-login-btn" id="user-login-btn">LogIn</a>
+                    </div>
                 </div>
             </div>
         </form>

@@ -29,7 +29,7 @@ class ExcelPlay extends BaseController
         $data=array();
         $data['title']="Excel Play - Free";
         $data['page']="free-excel-play";
-        $data['videoList']=$this->getVideos();
+        $data['videoList']=$this->getFreeVideos();
         // echo '<pre>';print_r($data);die;
         return view(EXCELPLAY_VIEWPATH.'/free-excel-play',$data);
     }
@@ -39,13 +39,32 @@ class ExcelPlay extends BaseController
         if(!checkSession()){
             return redirect()->to("login"); 
         }else{
-            $data=array();
-            $data['title']="Excel Play";
-            $data['page']="excel-play";
-            $data['videoList']=$this->getVideos();
-            $data['user'] = $this->common->get_single_row("users", "id", session("usersession")["id"]);
-            // echo '<pre>';print_r($data);die;
-            return view(EXCELPLAY_VIEWPATH.'/index',$data);
+            $course_id = $_GET['c']??'';
+            $plan_id = $_GET['p']??'';
+            // echo $course_id;echo ' - ';echo $plan_id;die;
+            if(!empty($course_id) && !empty($plan_id)){
+                $d = array(
+                    'user_id'=>session("usersession")['id'],
+                    'course_id'=>$course_id,
+                    'plan_id'=>$plan_id,
+                    'status'=>1
+                );
+                $c = $this->common->getUserCoursePlanStatus(session("usersession")['id'],$course_id,$plan_id);
+                if($c){
+                    $data=array();
+                    $data['title']="Excel Play";
+                    $data['page']="excel-play";
+                    $data['videoList']=$this->getVideos(session("usersession")["id"]);
+                    $data['user'] = $this->common->get_single_row("users", "id", session("usersession")["id"]);
+                    // echo '<pre>';print_r($data);die;
+                    return view(EXCELPLAY_VIEWPATH.'/index',$data);
+                }else{
+                    return redirect()->to("dashboard");
+                }
+            }else{
+                // var_dump('aaa');die;
+                return redirect()->to("dashboard");
+            }
         }
     }
 
@@ -87,21 +106,22 @@ class ExcelPlay extends BaseController
         }
     }
 
-    private function getVideos()
+    private function getFreeVideos()
     {
         $videoList = array();
-        $courses = $this->videoModel->get_course_list();
-        $videoList=$courses;
-        foreach ($videoList as $key => $value) {
-            $videos = $this->videoModel->get_video_list($value['id']);
-            $videoList[$key]['videos']=$videos;
-        }
-
-        $misc_video = $this->common->get_multiple_row('videos','course_id',0);
-        if($misc_video){
-            $videoList[count($courses)+1]['videos']=$misc_video;
-        }
         return $videoList;
+    }
+
+    private function getVideos($id)
+    {
+        $user_valid_plans = array();
+        $user_valid_plans = $this->videoModel->get_user_valid_course_plan_list($id);
+        if($user_valid_plans){
+            foreach ($user_valid_plans as $key => $value) {
+                $user_valid_plans[$key]['videos'] = $this->videoModel->get_video_based_course($value['course_id']);
+            }
+        }
+        return $user_valid_plans;
     }
 
 }

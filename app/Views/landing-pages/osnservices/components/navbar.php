@@ -8,31 +8,33 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <li class="nav-item">
-                        <a class="nav-link <?=$page=='home'?'active':''?>" aria-current="page" href="<?= base_url() ?>">Home</a>
+                        <a class="nav-link <?= $page == 'home' ? 'active' : '' ?>" aria-current="page" href="<?= base_url() ?>">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?=$page=='about-us'?'active':''?>" href="<?= base_url('about-us') ?>">About Us</a>
+                        <a class="nav-link <?= $page == 'about-us' ? 'active' : '' ?>" href="<?= base_url('about-us') ?>">About Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?=$page=='contact-us'?'active':''?>" href="<?= base_url('contact-us') ?>">Contact Us</a>
+                        <a class="nav-link <?= $page == 'contact-us' ? 'active' : '' ?>" href="<?= base_url('contact-us') ?>">Contact Us</a>
                     </li>
                 </ul>
                 <?php
-                $session = session();
-                $usersession = $session->get('usersession');
-                if(isset($usersession['isLoggedIn']) && $usersession['isLoggedIn']){
+                if (HEADER_LOGIN_BTN && PAID_EXCEL_PLAY) {
+                    $session = session();
+                    $usersession = $session->get('usersession');
+                    if (isset($usersession['isLoggedIn']) && $usersession['isLoggedIn']) {
                 ?>
-                <a href="<?=base_url('dashboard')?>">
-                    <button class="btn btn-primary login-btn-osn" type="button">Dashboard</button>
-                </a>
-                
+                        <a href="<?= base_url('dashboard') ?>">
+                            <button class="btn btn-primary login-btn-osn" type="button">Dashboard</button>
+                        </a>
+
+                    <?php
+                    } else {
+                    ?>
+                        <a href="<?= base_url('login') ?>">
+                            <button class="btn btn-primary login-btn-osn" type="button">LogIn</button>
+                        </a>
                 <?php
-                }else if(isset($login_cta) && !empty($login_cta) && $login_cta=='true'){
-                ?>
-                <a href="<?=base_url('login')?>">
-                    <button class="btn btn-primary login-btn-osn" type="button">LogIn</button>
-                </a>
-                <?php
+                    }
                 }
                 ?>
             </div>
