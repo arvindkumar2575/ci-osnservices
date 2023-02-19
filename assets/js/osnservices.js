@@ -129,7 +129,7 @@ $(document).ready(function() {
         
         if(plan_val != '0'){
             $(elm).html('')
-            let dis_price = Math.round(((100-plan_discount)/plan_price)*100)
+            let dis_price = Math.round(((100-plan_discount)/100)*plan_price)
             let html = `<span>Price: ₹${dis_price}</span>
             <span class="text-decoration-line-through px-2">₹${plan_price}</span>
             <span class="">Duration: ${plan_duration==0?'Lifetime':plan_duration+' Months'}</span>`
@@ -152,7 +152,7 @@ $(document).ready(function() {
         // console.log(plan_val)
 
         if(plan_val != '0'){
-            let dis_price = Math.round(((100-plan_discount)/plan_price)*100)
+            let dis_price = Math.round(((100-plan_discount)/100)*plan_price)
             let data = {
                 course_id:parseInt(course_id),
                 plan_id:parseInt(plan_val),
