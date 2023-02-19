@@ -13,9 +13,9 @@
 
     <!-- bootstrap minified css  -->
     <link href="<?= base_url('assets/common/css/bootstrap.min.css') ?>" rel="stylesheet">
-    <link href="<?= base_url('assets/common/css/common.css?v=1') ?>" rel="stylesheet">
+    <link href="<?= base_url('assets/common/css/common.css?v=2') ?>" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="<?= base_url('assets/css/osnservices.css?v=1') ?>" rel="stylesheet">
+    <link href="<?= base_url('assets/css/osnservices.css?v=2') ?>" rel="stylesheet">
 </head>
 
 <body>
