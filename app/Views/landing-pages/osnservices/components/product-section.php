@@ -1,14 +1,3 @@
-<?php
-
-use App\Libraries\Utilslib;
-
-$utilslib = new Utilslib();
-$cp = $utilslib->get_course_plan_details();
-// echo '<pre>';print_r($cp);die;
-
-$course_len = count($cp);
-// echo $course_len%2;die;
-?>
 
 <div class="row col-sm-12 product-cards">
     <?php
@@ -63,7 +52,7 @@ $course_len = count($cp);
         }
     }else{
         ?>
-        <p class="head-no-pln text-center">Courses available soon!</p>
+        <p class="head-no-pln text-center">Excel Courses available soon!</p>
         <?php
     }
     ?>
