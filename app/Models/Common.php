@@ -213,7 +213,7 @@ class Common extends Model
         try {
             if($user_id && $course_id && $plan_id){
                 $qry = 'SELECT id FROM user_course_plan_mapping
-                WHERE user_id='.$user_id.' AND course_id='.$course_id.' AND plan_id='.$plan_id.' AND end>=NOW() AND status=1';
+                WHERE user_id='.$user_id.' AND course_id='.$course_id.' AND plan_id='.$plan_id.' AND start<=NOW() AND end>=NOW() AND status=1';
                 $query = $this->db->query($qry);
                 $result = $query->getResultArray();
             }

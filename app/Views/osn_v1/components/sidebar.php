@@ -4,7 +4,7 @@
 ?>
 <div class="sidebar">
     <nav class="navbar bg-light navbar-light">
-        <a href="<?= base_url('excel-play') ?>" class="navbar-brand mx-4 mb-3">
+        <a href="javascript:void(0)" class="navbar-brand mx-4 mb-3">
             <h3 class="text-primary">Excel Play</h3>
         </a>
 
