@@ -1,4 +1,4 @@
-<div class="intro-header">
+<div class="intro-header" style="background: url(<?=base_url('assets/images/intro-bg.jpg')?>) repeat center center;">
     <div class="container">
         <div class="intro-message">
             <h1><?=isset($title)&&!empty($title)?$title:""?></h1>

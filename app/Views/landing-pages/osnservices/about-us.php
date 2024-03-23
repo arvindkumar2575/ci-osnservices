@@ -1,12 +1,15 @@
-<?= view(OSNSERVICES_VIEWPATH . '/components/head') ?>
-<?= view(OSNSERVICES_VIEWPATH . '/components/navbar') ?>
+<?= view(OSNSERVICES_VIEW . '/components/head') ?>
+<?= view(OSNSERVICES_VIEW . '/components/navbar') ?>
 
 
-<?= view(OSNSERVICES_VIEWPATH . '/components/header-short') ?>
+<?= view(OSNSERVICES_VIEW . '/components/header-short') ?>
 
 <div class="container">
-    <p class="lead" style="padding: 40px 0 0 0;text-align: center;">
-        OSN is a team of a 5 members who specialized in their field containing<br>
+    <p class="lead" style="padding: 40px 0 0 0;text-align: center;">    
+    OSN Services is a firm which provides services related to GST registration, Accounting Work, ITR Filing, Dashboard Designing, Development work & Job Skill Material. These all work to provide time to time update information to our customer by mail or whatsapp. And we care for our customers, and entertain queries related to our work and provide emigrate answers or take action to resolve queries.</p>
+    
+<p class="lead" style="padding: 40px 0 0 0;text-align: center;">
+        OSN services is a team of a 5 members who specialized in their field containing<br>
     </p>
     <p class="lead" style="text-align: center;">
         <b>
@@ -29,5 +32,12 @@
         Inquiry our products by filing our form's link below:<br>
         <a href="<?= base_url('contact-us') ?>">Inquiry Form</a>
     </p>
+
+
+    
+
+
+
+
 </div>
-<?= view(OSNSERVICES_VIEWPATH . '/components/footer') ?>
+<?= view(OSNSERVICES_VIEW . '/components/footer') ?>

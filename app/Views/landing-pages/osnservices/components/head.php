@@ -12,10 +12,11 @@
     <link rel="canonical" href="<?=current_url()?>">
 
     <!-- bootstrap minified css  -->
-    <link href="<?= base_url('assets/common/css/bootstrap.min.css') ?>" rel="stylesheet">
-    <link href="<?= base_url('assets/common/css/common.css?v=2') ?>" rel="stylesheet">
+    <link href="<?= base_url(COMMON_ASSETS.'/css/bootstrap.min.css') ?>" rel="stylesheet">
+    <link href="<?= base_url(COMMON_ASSETS.'/summernotejs/summernote.min.css') ?>" rel="stylesheet">
+    <link href="<?= base_url(COMMON_ASSETS.'/css/common.css?v=2') ?>" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="<?= base_url('assets/css/osnservices.css?v=2') ?>" rel="stylesheet">
+    <link href="<?= base_url(OSNSERVICES_ASSETS.'/css/osnservices.css?v=2') ?>" rel="stylesheet">
 </head>
 
 <body>

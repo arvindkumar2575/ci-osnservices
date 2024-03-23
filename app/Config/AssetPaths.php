@@ -8,7 +8,7 @@ class AssetPaths extends BaseConfig{
 
     public $style = [
         'osnservices' => [
-            "assets",
+            "css"=>array()
         ],
     ];
 

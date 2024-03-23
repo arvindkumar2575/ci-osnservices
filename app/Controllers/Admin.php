@@ -24,11 +24,15 @@ class Admin extends BaseController
 
     }
 
+    // view admin page all values 
     public function admin()
     {
         if (!checkSession()) {
             return redirect()->to("login");
         } else {
+            if($this->request->getMethod() == 'post'){
+                echo 'aaaasss';die;
+            }
             $data = array();
             $data['page'] = "admin";
             $data['user'] = $this->common->getUserDetails(session("usersession")["id"]);
@@ -40,6 +44,8 @@ class Admin extends BaseController
             $data['contactdetails'] = $this->common->getContactFormDetails();
             $data['videos'] = $this->common->getVideos();
             $data['users'] = $this->common->getUsers();
+            $data['settings'] = $this->settings->get_all_settings();
+            $data['media'] = $this->common->getMedia();
             // echo '<pre>';print_r($data);die;
             if($data['user']['user_type']=='admin'){
                 return view(OSN_VIEWPATH . '/admin', $data);
@@ -49,6 +55,7 @@ class Admin extends BaseController
         }
     }
 
+    // fetch form fields for add/edit : --get/post--api/fetch-add-edit-form
     public function fetchAddEditForm()
     {
         $data = array();
@@ -59,9 +66,11 @@ class Admin extends BaseController
         $plan_id = $this->request->getVar('plan_id')??null;
         $video_id = $this->request->getVar('video_id')??null;
         $ucpm_id = $this->request->getVar('ucpm_id')??null;
+        $s_id = $this->request->getVar('s_id')??null;
+        $m_id = $this->request->getVar('m_id')??null;
         
         
-        // var_dump($operation,$type,$user_id,$course_id,$plan_id,$video_id);die;
+        // var_dump($operation,$type,$user_id,$course_id,$plan_id,$video_id,$s_id,$m_id);die;
         $data['operation']=$operation;
         $data['type']=$type;
         switch ($type) {
@@ -123,6 +132,30 @@ class Admin extends BaseController
                 }
                 // echo '<pre>';print_r($data);die;
                 break;
+            case 'settings':
+                $data['heading'] = $operation=='add'?'Add Settings':'Edit Settings';
+                if(isset($s_id)){
+                    $settings_detail = $this->common->get_data('settings',array('id'=>$s_id));
+                    $data['s_setting_type']=$settings_detail['setting_type'];
+                    $data['s_name']=$settings_detail['name'];
+                    $data['s_display_name']=$settings_detail['display_name'];
+                    $data['s_value']=$settings_detail['value'];
+                    $data['s_priority']=$settings_detail['priority'];
+                }
+                // echo '<pre>';print_r($data);die;
+                break;
+            case 'media':
+                $data['heading'] = $operation=='add'?'Add Media':'Edit Media';
+                if(isset($m_id)){
+                    $media_detail = $this->common->get_data('media',array('id'=>$m_id));
+                    $data['m_media_type']=$media_detail['media_type'];
+                    $data['m_name']=$media_detail['name'];
+                    $data['m_display_name']=$media_detail['display_name'];
+                    $data['m_url']=$media_detail['url'];
+                    $data['m_status']=$media_detail['status'];
+                }
+                // echo '<pre>';print_r($data);die;
+                break;
             default:
                 $data['heading'] = 'Add Form';
                 break;
@@ -132,6 +165,8 @@ class Admin extends BaseController
         $data['course_id']=$course_id;
         $data['plan_id']=$plan_id;
         $data['video_id']=$video_id;
+        $data['s_id']=$s_id;
+        $data['m_id']=$m_id;
         if ($operation == 'edit') {
         }else if($operation == 'add'){
         }
@@ -143,10 +178,10 @@ class Admin extends BaseController
     }
 
 
+    // add/edit/delete form data : --post--api/add-edit-delete
     public function addEditDeleteFormData()
     {
         try {
-
             $data = array();
             $operation = $this->request->getVar('operation');
             $type = $this->request->getVar('type');
@@ -155,9 +190,11 @@ class Admin extends BaseController
             $course_id = $this->request->getVar('course_id')??null;
             $plan_id = $this->request->getVar('plan_id')??null;
             $video_id = $this->request->getVar('video_id')??null;
+            $s_id = $this->request->getVar('s_id')??null;
+            $m_id = $this->request->getVar('m_id')??null;
             
             
-            // var_dump($operation,$type,$user_id,$course_id,$plan_id,$video_id);die;
+            // var_dump($operation,$type,$user_id,$course_id,$plan_id,$video_id,$s_id);die;
             switch ($type) {
                 case 'courses':
                     $data['heading'] = $operation=='add'?'Add Courses':'Edit Course';
@@ -476,43 +513,142 @@ class Admin extends BaseController
                         }
                     }
                     break;
+                case 'settings':
+                    $data['heading'] = $operation=='add'?'Add User Course Plan Mapping':'Edit User Course Plan Mapping';
+                    $data = array(
+                        'setting_type'=>$this->request->getVar('setting_type')??'',
+                        'name'=>$this->request->getVar('name')??'',
+                        'display_name'=>$this->request->getVar('display_name')??'',
+                        'value'=>$this->request->getVar('value')??'',
+                        'priority'=>$this->request->getVar('priority')??'',
+                    );
+                    
+                    $currentDate = new DateTime();
+                    if($operation=='add'){
+                        // echo '<pre>';print_r($data);die;
+                        $id = $this->common->data_insert('settings',$data);
+                        if($id){
+                            $result = array('status' => true, 'message' => 'Setting added successfully!');
+                            return json_encode($result);
+                        }else{
+                            $result = array('status' => false, 'message' => 'Please try again!');
+                            return json_encode($result);
+                        }
+                    }elseif($operation=='edit'){
+                        $where = array('id'=>$s_id);
+                        // echo '<pre>';print_r($data);die;
+                        $id = $this->common->data_update('settings',$where,$data);
+                        if($id){
+                            $result = array('status' => true, 'message' => 'Setting updated successfully!');
+                            return json_encode($result);
+                        }else{
+                            $result = array('status' => false, 'message' => 'Please try again!');
+                            return json_encode($result);
+                        }
+                    }elseif($operation=='delete'){
+                        $where = array('id'=>$s_id);
+                        // echo '<pre>';print_r($where);die;
+                        $id = $this->common->data_delete('settings',$where);
+                        if($id){
+                            $result = array('status' => true, 'message' => 'Setting deleted successfully!','id'=>$id);
+                            return json_encode($result);
+                        }else{
+                            $result = array('status' => false, 'message' => 'Please try again!');
+                            return json_encode($result);
+                        }
+                    }
+                    break;
+                case 'media':
+                    $data = array(
+                        'media_type'=>$this->request->getVar('media_type')??'',
+                        'status'=>$this->request->getVar('status')??'',
+                        'name'=>$this->request->getVar('name')??'',
+                        'display_name'=>$this->request->getVar('display_name')??'',
+                    );
+                    // echo '<pre>';print_r($data);die;
+                    
+                    $currentDate = new DateTime();
+                    if($operation=='add'){
+                        $media_file = $this->request->getFiles()['media_file'];
+                        if ($media_file->isValid() && !$media_file->hasMoved()) {
+                            $fileName = $media_file->getRandomName();
+                            $fileExtNameCheck = explode(".",$fileName);
+                            if($data['media_type']!=$fileExtNameCheck[1]){
+                                $result = array('status' => false, 'message' => 'File type not matched!');
+                                return json_encode($result);
+                            }
+                            
+                            $status = $media_file->move(UPLOAD_IMAGES, $fileName);
+                            if (!$status) {
+                                $result = array('status' => false, 'message' => 'Please try again!');
+                                return json_encode($result);
+                            }
+                            $data['name'] = $fileExtNameCheck[0];
+                            $data['url'] = UPLOAD_IMAGES.$fileName;
+                        }else{
+                            $result = array('status' => false, 'message' => 'Please try again!');
+                            return json_encode($result);
+                        }
+                        // echo '<pre>';print_r($data);die;
+                        $id = $this->common->data_insert('media',$data);
+                        if($id){
+                            $result = array('status' => true, 'message' => 'Setting added successfully!');
+                            return json_encode($result);
+                        }else{
+                            $result = array('status' => false, 'message' => 'Please try again!');
+                            return json_encode($result);
+                        }
+                    }elseif($operation=='edit'){
+                        $media_file = $this->request->getFiles()['media_file'];
+                        $where = array('id'=>$m_id);
+                        if ($media_file->isValid() && !$media_file->hasMoved()) {
+                            $fileName = $media_file->getRandomName();
+                            $fileExtNameCheck = explode(".",$fileName);
+                            if($data['media_type']!=$fileExtNameCheck[1]){
+                                $result = array('status' => false, 'message' => 'File type not matched!');
+                                return json_encode($result);
+                            }
+                            
+                            $status = $media_file->move(UPLOAD_IMAGES, $fileName);
+                            if (!$status) {
+                                $result = array('status' => false, 'message' => 'Please try again!');
+                                return json_encode($result);
+                            }
+                            $data['name'] = $fileExtNameCheck[0];
+                            $data['url'] = UPLOAD_IMAGES.$fileName;
+                        }
+                        // echo '<pre>';print_r($data);die;
+                        $id = $this->common->data_update('media',$where,$data);
+                        if($id){
+                            $result = array('status' => true, 'message' => 'Media updated successfully!');
+                            return json_encode($result);
+                        }else{
+                            $result = array('status' => false, 'message' => 'Please try again!');
+                            return json_encode($result);
+                        }
+                    }elseif($operation=='delete'){
+                        $where = array('id'=>$m_id);
+                        $deleteData = $this->common->get_data('media',$where);
+                        // echo base_url($deleteData['url']);echo '<pre>';print_r($deleteData);die;
+                        if(isset($deleteData['url']) && !empty($deleteData['url'])){
+                            unlink($deleteData['url']);
+                        }
+                        $id = $this->common->data_delete('media',$where);
+                        if($id){
+                            $result = array('status' => true, 'message' => 'Setting deleted successfully!','id'=>$id);
+                            return json_encode($result);
+                        }else{
+                            $result = array('status' => false, 'message' => 'Please try again!');
+                            return json_encode($result);
+                        }
+                    }
+                    break;
                 default:
                     $data['heading'] = 'Add Form';
                     break;
             }
 
 
-
-
-
-
-            $id = $this->request->getVar('id');
-            $course_id = $this->request->getVar('course_id');
-            $url = $this->request->getVar('url');
-            $title = $this->request->getVar('title');
-            $description = $this->request->getVar('description');
-            $video_data=array(
-                'course_id' => $course_id,
-                'title' => $title,
-                'description' => $description,
-            );
-            $video_id=false;
-            if($id){
-                $where = array('id'=>$id,'url'=>$url);
-                $video_id = $this->common->data_update('videos', $where, $video_data);
-            }else{
-                $video_data=array_merge($video_data,array('url'=>$url));
-                $video_id = $this->common->data_insert('videos',$video_data);
-            }
-            
-            // echo 'asdf<pre>';print_r($video_data);die;
-            if($video_id){
-                $result = array('status' => true, 'message' => 'Video added successfully!');
-                return json_encode($result);
-            }else{
-                $result = array('status' => false, 'message' => 'Please try again!');
-                return json_encode($result);
-            }
         } catch (\Exception $e) {
             $result = array('status' => false, 'message' => $e['message']);
             return json_encode($result);

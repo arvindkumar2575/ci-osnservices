@@ -9,7 +9,8 @@
 <!-- <script defer src="<?= base_url('assets/js/init-firebase.js')?>"></script> -->
 <script src="<?= base_url('assets/common/js/jquery.min.js') ?>"></script>
 <script src="<?= base_url('assets/common/js/bootstrap.bundle.min.js') ?>"></script>
+<script src="<?= base_url('assets/common/summernotejs/summernote.min.js') ?>"></script>
 <script src="<?= base_url('assets/common/js/select2.min.js') ?>"></script>
 <script src="<?= base_url('assets/common/js/common.js') ?>"></script>
-<script src="<?= base_url('assets/js/easing.min.js') ?>"></script>
-<script src="<?= base_url('assets/js/dashboard.js') ?>"></script>
+<script src="<?= base_url('assets/osn/js/easing.min.js') ?>"></script>
+<script src="<?= base_url('assets/osn/js/dashboard.js') ?>"></script>

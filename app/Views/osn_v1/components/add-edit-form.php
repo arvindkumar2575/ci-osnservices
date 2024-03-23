@@ -16,7 +16,7 @@ $videos = $common->getVideos();
         <h3><?= $heading ?></h3>
         <span class="close-form"><i class="fas fa-times" aria-hidden="true"></i></span>
     </div>
-    <form class="add-edit-form <?= $operation ?>" data-type="<?= $type ?>" id="add-edit-form">
+    <form class="<?=$type=='media'?$type.'-':''?>add-edit-form <?= $operation ?>" data-type="<?= $type ?>" id="<?=$type=='media'?$type.'-':''?>add-edit-form" enctype="multipart/form-data">
 
         <div class="row">
 
@@ -515,6 +515,170 @@ $videos = $common->getVideos();
             <!--######################################################################################################################################################################################-->
 
 
+            <?php
+            if (in_array($type,['settings'])) {
+                $selected_val = '';
+                if (isset($s_id)) {
+                    $selected_val = $s_setting_type;
+                }
+                ?>
+                <div class="form-group col-md-6">
+                    <label for="setting_type">Type</label>
+                    <input type="text" name="setting_type" class="form-control" id="setting_type" placeholder="type" value="<?=$selected_val?>"/>
+                </div>
+                <?php
+
+                
+
+                $selected_val = '';
+                if (isset($s_id)) {
+                    $selected_val = $s_name;
+                }
+                ?>
+                <div class="form-group col-md-6">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" class="form-control" id="name" placeholder="Name" value="<?=$selected_val?>"/>
+                </div>
+                <?php
+
+
+
+                $selected_val = '';
+                if (isset($s_id)) {
+                    $selected_val = $s_display_name;
+                }
+                ?>
+                <div class="form-group col-md-6">
+                    <label for="display_name">Display Name</label>
+                    <input type="text" name="display_name" class="form-control" id="display_name" placeholder="Display Name" value="<?=$selected_val?>"/>
+                </div>
+                <?php
+
+
+
+                $selected_val = '';
+                if (isset($s_id)) {
+                    $selected_val = $s_priority;
+                }
+                ?>
+                <div class="form-group col-md-6">
+                    <label for="priority">Priority</label>
+                    <input type="text" name="priority" class="form-control" id="priority" placeholder="Priority" value="<?=$selected_val?>"/>
+                </div>
+                <?php
+
+
+                $selected_val = '';
+                if (isset($s_id)) {
+                    $selected_val = $s_value;
+                }
+                ?>
+                <div class="form-group col-md-12">
+                    <label for="value">Value</label><button type="button" class="btn btn-primary" id="enable_srte-editor">Enable Editor</button>
+                    <textarea name="value" class="form-control srte-editor" id="value" placeholder="Value" rows="10"><?=$selected_val?></textarea>
+                </div>
+                <?php
+
+
+
+            }
+            ?>
+
+
+            <!--######################################################################################################################################################################################-->
+
+
+            <?php
+            if (in_array($type,['media'])) {
+                $selected_val = '';
+                if (isset($m_id)) {
+                    $selected_val = $m_media_type;
+                }
+                ?>
+                <div class="form-group col-md-6">
+                    <label for="media_type">File Type</label>
+                    <select id="media_type" class="form-control" name="media_type">
+                        <option value="" <?= ($selected_val == '' ? 'selected' : '') ?>>--Select Status--</option>
+                        <option value="png" <?= ($selected_val == 'png' ? 'selected' : '') ?>>Image - Type : PNG</option>
+                        <option value="jpg" <?= ($selected_val == 'jpg' ? 'selected' : '') ?>>Image - Type : JPG</option>
+                        <option value="jpeg" <?= ($selected_val == 'jpeg' ? 'selected' : '') ?>>Image - Type : JPEG</option>
+                    </select>
+                </div>
+                <?php
+
+
+
+                $selected_val = '';
+                if (isset($m_id)) {
+                    $selected_val = $m_status;
+                }
+                ?>
+                <div class="form-group col-md-6">
+                    <label for="status">Status</label>
+                    <select id="status" class="form-control" name="status">
+                        <option value="0" >--Select Status--</option>
+                        <option value="0" <?= ($selected_val == '0' ? 'selected' : '') ?>>InActive</option>
+                        <option value="1" <?= ($selected_val == '1' ? 'selected' : '') ?>>Active</option>
+                    </select>
+                </div>
+                <?php
+
+
+                $selected_val = '';
+                if (isset($m_id)) {
+                    $selected_val = $m_name;
+                }
+                ?>
+                <div class="form-group col-md-6 div-hidden">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" class="form-control" id="name" placeholder="name" value="<?=$selected_val?>"/>
+                </div>
+                <?php
+
+
+                $selected_val = '';
+                if (isset($m_id)) {
+                    $selected_val = $m_display_name;
+                }
+                ?>
+                <div class="form-group col-md-6">
+                    <label for="display_name">Display Name</label>
+                    <input type="text" name="display_name" class="form-control" id="display_name" placeholder="display name" value="<?=$selected_val?>"/>
+                </div>
+                <?php
+
+
+                $selected_val = '';
+                if (isset($m_id)) {
+                    $selected_val = '';
+                }
+                ?>
+                <div class="form-group col-md-6">
+                    <label for="media_file">Select File</label>
+                    <div class="">
+                        <input type="file" name="media_file" class="form-control" id="media_file" placeholder="file" value="<?=$selected_val?>"/>
+                        <?php
+                        if(isset($m_url)){
+                        ?>
+                            <div class="img mt-2">
+                                <img height="40" height="40" src="<?=base_url($m_url)?>" />
+                        </div>
+                        <?php
+                        }
+                        ?>
+                    </div>
+                </div>
+                <?php
+
+
+
+            }
+            ?>
+
+
+            <!--######################################################################################################################################################################################-->
+
+
         </div>
 
 
@@ -539,6 +703,12 @@ $videos = $common->getVideos();
         }
         if (isset($ucpm_id) && !empty($ucpm_id) && is_numeric($ucpm_id)) {
             $hiddenInp .= '<input type="hidden" name="ucpm_id" value="' . $ucpm_id . '" />';
+        }
+        if (isset($s_id) && !empty($s_id) && is_numeric($s_id)) {
+            $hiddenInp .= '<input type="hidden" name="s_id" value="' . $s_id . '" />';
+        }
+        if (isset($m_id) && !empty($m_id) && is_numeric($m_id)) {
+            $hiddenInp .= '<input type="hidden" name="m_id" value="' . $m_id . '" />';
         }
         echo $hiddenInp;
         ?>

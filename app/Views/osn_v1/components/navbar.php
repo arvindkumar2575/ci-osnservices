@@ -9,13 +9,13 @@
         if (ADMIN_PANEL && isset($user['user_type']) && $user['user_type']=='admin') {
             if(strpos(current_url(),'admin')){
             ?>
-            <div class="nav-item navb-btn">
+            <div class="nav-item navb-btn desktop-view">
                 <a href="<?=base_url('/dashboard')?>" class="dropdown-item">Dashboard</a>
             </div>
             <?php
             }else{
             ?>
-            <div class="nav-item navb-btn">
+            <div class="nav-item navb-btn desktop-view">
                 <a href="<?=base_url('/admin')?>" class="dropdown-item">Admin Panel</a>
             </div>
             <?php
@@ -23,9 +23,12 @@
         }
         ?>
         
-        <div class="nav-item navb-btn">
+        <div class="nav-item navb-btn desktop-view">
             <a href="<?=base_url('/')?>" class="dropdown-item">Back to Website</a>
         </div>
+
+
+
         <div class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                 <img class="rounded-circle me-lg-2" src="<?=base_url('/assets/images/avatar-img.png')?>" alt="" style="width: 40px; height: 40px;">
@@ -34,8 +37,32 @@
             <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                 <?php /* <!-- <a href="<?=base_url('/dashboard/profile')?>" class="dropdown-item">My Profile</a> -->
                 <a href="<?=base_url('/dashboard/settings')?>" class="dropdown-item">Settings</a> */?>
-                <a href="<?=base_url('/logout')?>" class="dropdown-item">Log Out</a>
+                
+                <div class="mobile-view">
+                    <?php
+                    if (ADMIN_PANEL && isset($user['user_type']) && $user['user_type']=='admin') {
+                        if(strpos(current_url(),'admin')){
+                        ?>
+                            <a href="<?=base_url('/dashboard')?>" class="dropdown-item">Dashboard</a>
+                        <?php
+                        }else{
+                        ?>
+                            <a href="<?=base_url('/admin')?>" class="dropdown-item">Admin Panel</a>
+                        <?php
+                        }
+                    }
+                    ?>
+                </div>
+                <div class="mobile-view">
+                    <a href="<?=base_url('/')?>" class="dropdown-item">Back to Website</a>
+                </div>
+
+                <div class="desktop-mobile-view">
+                    <a href="<?=base_url('/logout')?>" class="dropdown-item">Log Out</a>
+                </div>
+                
             </div>
+            
         </div>
     </div>
 </nav>

@@ -94,17 +94,75 @@ define('EVENT_PRIORITY_NORMAL', 100);
 define('EVENT_PRIORITY_HIGH', 10);
 
 
-define('FREE_EXCEL_PLAY',false);
+
+
+
+
+
+
+
+
+define('WEBSITE_NAME',"OSN Services");
+
+// ################ Seetings ########################################################################
 // settings
+define('FREE_EXCEL_PLAY',false);
 define('HEADER_LOGIN_BTN',true);
 define('PAID_EXCEL_PLAY',true);
 define('ADMIN_PANEL',true);
 
+// ################ Settings ########################################################################
+
+// ################ View Paths ########################################################################
+define('COMMON_VIEW', 'common');
+
+// landing pages 
+define('LANDINGPAGES_VIEW', 'landing-pages');
+
+// osnservices 
+define('OSNSERVICES_VIEW', LANDINGPAGES_VIEW.'/osnservices');
+
+// mydashboard 
+define('MYDASHBOARD_VIEW', 'mydashboard');
+
+// admin 
+define('ADMIN_VIEW', 'admin');
+
+// myvideogallery 
+define('MYVIDEOSGALLERY_VIEW', 'myvideogallery');
+
+// ################ View Paths ########################################################################
+
+// ################ Assets Paths ########################################################################
+// assets 
+define('ASSETS','assets');
+
+// common assets 
+define('COMMON_ASSETS',ASSETS.'/common');
+
+// osnservices
+define('OSNSERVICES_ASSETS', ASSETS.'/osn');
+
+// mydashboard 
+define('MYDASHBOARD_ASSETS', ASSETS.'/mydashboard');
+
+// admin 
+define('ADMIN_ASSETS', ASSETS.'/admin');
+
+// myvideogallery 
+define('MYVIDEOSGALLERY_ASSETS', ASSETS.'/admin');
+
+// ################ Assets Paths ########################################################################
+
+// ################ Images Paths ########################################################################
+// image upload pages 
+define('UPLOAD_IMAGES', ASSETS."/images/");
+
+// ################ Images Paths ########################################################################
 
 
-define('LANDING_PAGES_VIEWPATH', 'landing-pages');
 define('COMMON_VIEWPATH', 'common');
-define('OSNSERVICES_VIEWPATH', LANDING_PAGES_VIEWPATH.'/osnservices');
+define('OSNSERVICES_VIEWPATH', LANDINGPAGES_VIEW.'/osnservices');
 
 define('OSN_VIEWPATH', 'osn_v1');
 
@@ -116,3 +174,5 @@ define('excel_play', 'Excel Play');
 define('basic_excel', 'Basic Excel');
 
 
+
+define('MYDASHBOARD', 'mydashboard');

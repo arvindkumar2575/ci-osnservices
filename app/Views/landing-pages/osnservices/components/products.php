@@ -16,10 +16,10 @@ $course_len = count($cp);
             <h3 class="product-section-heading">Courses</h3>
             <?php
             if (FREE_EXCEL_PLAY) {
-                echo view(OSNSERVICES_VIEWPATH . '/components/product-section-free');
+                echo view(OSNSERVICES_VIEW . '/components/product-section-free');
             }
             if (PAID_EXCEL_PLAY) {
-                echo view(OSNSERVICES_VIEWPATH . '/components/product-section',['cp'=>$cp,'course_len'=>$course_len]);
+                echo view(OSNSERVICES_VIEW . '/components/product-section',['cp'=>$cp,'course_len'=>$course_len]);
             }
             ?>
         </div>

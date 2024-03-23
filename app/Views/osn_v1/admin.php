@@ -3,8 +3,26 @@
 
 
 <div class="container-xxl admin-layout">
+    <?php /*
+    // checking two col in dashboard & admin page
+    ?>
+    <div class="row">
+        <div class="w-250px">
+            <li>List 1</li>
+            <li>List 1</li>
+            <li>List 1</li>
+            <li>List 1</li>
+        </div>
+        <div class="admin-content col-sm-12">
+            <div>content</div>
+        </div>
+    </div>
+    <?php
+    */ ?>
     <div class="row">
         <div class="col-md-8">
+
+
             <div class="row-main-list">
                 <div class="head">
                     <h5>Courses</h5>
@@ -141,6 +159,49 @@
                     ?>
                 </div>
             </div>
+
+            <div class="row-main-list">
+                <div class="head">
+                    <h5>Settings</h5>
+                    <button class="add btn btn-primary admin-btn-add" type="button" data-dl="settings"><i class="fas fa-plus"></i></button>
+                </div>
+                <div>
+                    <?php
+                    foreach ($settings as $key => $value) {
+                    ?>
+                        <li class="ls">
+                            <button class="edit btn btn-success admin-btn-edit" type="button" data-dl="settings" data-id="<?= $value['id'] ?>"><i class="fas fa-edit"></i></button>
+                            <button class="delete btn btn-danger admin-btn-delete" type="button" data-dl="settings" data-id="<?= $value['id'] ?>"><i class="fas fa-solid fa-trash"></i></button>
+                            <span><?= $value['id'].' <i class="fas fa-solid fa-arrow-right"></i> '.$value['setting_type'].'<i class="fas fa-solid fa-arrow-right"></i> '.$value['display_name'].'('.$value['name'].')' ?></span>
+                        </li>
+                    <?php
+                    }
+                    ?>
+                </div>
+            </div>
+            
+
+            <div class="row-main-list">
+                <div class="head">
+                    <h5>Media</h5>
+                    <button class="add btn btn-primary admin-btn-add" type="button" data-dl="media"><i class="fas fa-plus"></i></button>
+                </div>
+                <div>
+                    <?php
+                    foreach ($media as $key => $value) {
+                    ?>
+                        <li class="ls">
+                            <button class="edit btn btn-success admin-btn-edit" type="button" data-dl="media" data-id="<?= $value['id'] ?>"><i class="fas fa-edit"></i></button>
+                            <button class="delete btn btn-danger admin-btn-delete" type="button" data-dl="media" data-id="<?= $value['id'] ?>"><i class="fas fa-solid fa-trash"></i></button>
+                            <span><?= $value['id'].' <i class="fas fa-solid fa-arrow-right"></i> '.$value['media_type'].'<i class="fas fa-solid fa-arrow-right"></i> '.$value['display_name'].'('.$value['name'].') <i class="fas fa-solid fa-arrow-right"></i> '.$value['status'] ?></span>
+                        </li>
+                    <?php
+                    }
+                    ?>
+                </div>
+            </div>
+
+
 
             <div class="row-main-list">
                 <div class="head">

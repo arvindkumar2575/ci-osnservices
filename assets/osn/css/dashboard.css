@@ -1,0 +1,343 @@
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap');
+
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: #000;
+}
+
+/* login form class  */
+/* .login-form{
+    width: 100%;
+    margin: 0 auto;
+} */
+/* .login-form .form-div{
+    width: 100%;
+    min-height: 100vh;
+} */
+
+
+.form-div form{
+    margin: 0 auto;
+    /* width: 600px; */
+}
+form.user-login-form, form.user-register-form{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+form.user-login-form .main-section, form.user-register-form .main-section{
+    display: flex;
+    justify-content: space-between;
+    width: 800px;
+    background-color: #eee;
+    padding: 50px 30px;
+    border-radius: 8px;
+}
+
+
+
+/* field error  */
+.field-focus-error{
+    border: 1px solid #f00;
+    box-shadow: 0 0 0.1rem 0.25rem #f00
+}
+
+.main-body{
+    position: relative;
+}
+
+.navbar-brand{
+    width: 100%;
+    border-bottom: 1px solid;
+    margin: 0!important;
+    padding: 0.2rem 1.5rem;
+}
+.navbar .text-primary{
+    margin-bottom: 0;
+}
+.navbar .navb-btn{
+    margin-left: 10px;
+}
+.navbar .navb-btn .dropdown-item{
+    padding: 6px 10px;
+    color: #fff;
+    background-color: #0d6efd;
+    border-radius: 4px;
+}
+
+.sidebar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 250px;
+    height: 100vh;
+    overflow-y: auto;
+    background: #d7d7d7;
+    transition: 0.5s;
+    z-index: 999;
+}
+
+.sidebar .navbar-nav{
+    padding: 0 15px;
+}
+.sidebar .navbar {
+    background-color: #d7d7d7!important;
+}
+
+.content {
+    margin-left: 250px;
+    min-height: 100vh;
+    background: #FFFFFF;
+    transition: 0.5s;
+    z-index: 10;
+}
+
+
+.content .navbar .sidebar-toggler, .content .navbar .navbar-nav .nav-link i {
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFFFFF;
+    border-radius: 40px;
+}
+
+.sidebar .navbar .navbar-nav .nav-link i {
+    width: 25px;
+    height: 25px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFFFFF;
+    border-radius: 40px;
+}
+
+.dropdown-menu{
+    margin: 0;
+    padding: 0;
+}
+
+.pointer{
+    cursor: pointer;
+}
+.navbar .navbar-nav .dropdown-sidebar{
+    margin-top: 5px;
+}
+.dropdown-sidebar-menu{
+    display: none;
+}
+.dropdown-sidebar-menu.open{
+    display: block;
+}
+.dropdown-sidebar-menu-item{
+    margin: 5px 0 5px 10px;
+}
+.dropdown-sidebar-item{
+    padding: 0;
+    margin: 5px 0;
+    background-color: #d7d7d7;
+    border-radius: 4px;
+}
+.dropdown-sidebar-menu-item{
+    border-radius: 4px;
+}
+.dropdown-sidebar-item.active,.dropdown-sidebar-menu-item.active{
+    background-color: #f8f9fa;
+}
+.dropdown-sidebar i.fa{
+    width: 25px;
+    height: 25px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFFFFF;
+    border-radius: 40px;
+}
+.free-excel-heading h4{
+    margin: 0;
+    padding-left: 15px;
+}
+
+
+
+
+.admin-layout{
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+.admin-layout .head-pln-title{
+    padding: 0 10px;
+    margin-bottom: 10px;
+}
+.admin-layout .head-no-pln {
+    padding: 0 10px;
+    margin-bottom: 10px;
+}
+.admin-layout .right-layout{
+    /* border-left: 1px solid; */
+}
+.admin-layout .right-layout .user-row{
+    padding: 0 10px;
+}
+.admin-layout .right-layout .user-row.head{
+    background-color: #c0c0c0;
+}
+.admin-layout h4,.admin-layout h5,.admin-layout h6{
+    margin-bottom: 0;
+}
+.admin-layout .row-main-list{
+    margin-bottom: 1rem;
+}
+.admin-layout .row-main-list .ls{
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+.admin-layout .row-main-list .head{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #c0c0c0;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+.admin-layout button.add{
+    padding: 2px 8px;
+}
+.admin-layout button.edit{
+    padding: 0px 5px;
+}
+.admin-layout button.delete{
+    padding: 0px 5px;
+}
+
+
+
+.add-form-popup-modal{
+    position: fixed;
+    z-index: 1200;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #2a2a2acc;
+}
+.add-form-popup-modal .form{
+    background-color: #eee;
+    width: 80%;
+    padding: 1.5rem;
+    overflow-y: scroll;
+    max-height: 100vh;
+}
+.add-form-popup-modal .form .head{
+    display: flex;
+    justify-content: space-between;
+}
+.add-form-popup-modal .form .head .close-form{
+    padding: 8px 10px;
+    background-color: #d3d3d3;
+    cursor: pointer;
+}
+
+
+/* .row-main-list :first-child.product-row{
+    padding-top: 0;
+} */
+.product-row{
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 15px;
+    background-color: #eee;
+    border-radius: 4px;
+    position: relative;
+}
+.product-row .first-row{
+    display: flex;
+    justify-content: space-between;
+    padding: 2px 10px;
+    border-bottom: 1px solid #fff;
+    background-color: #dcdcdc;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+.product-row .middle-row{
+    padding: 2px 10px;
+}
+.product-row .plan-price-detail{
+    display: flex;
+    /* justify-content: end; */
+    padding: 2px 10px;
+    border-top: 1px solid #fff;
+}
+.product-row .pd-locked{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background: #000;
+    border-radius: 4px;
+    opacity: 0.5;
+    color: #fff;
+    font-weight: 500;
+}
+
+.div-hidden{
+    display: none;
+}
+
+.w-250px{
+    max-width: 250px;
+    min-width: 100px;
+}
+
+
+
+
+
+
+
+@media (min-width: 992px){
+    .sidebar.open {
+        margin-left: -250px;
+    }
+    .content {
+        width: calc(100% - 250px);
+    }
+    .content.open {
+        width: 100%;
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 768px){
+    .mobile-view{
+        display: none;
+    }
+    .desktop-view{
+        display: block;
+    }
+}
+@media (max-width: 767px){
+    .mobile-view{
+        display: block;
+    }
+    .desktop-view{
+        display: none;
+    }
+}
+
+@media (max-width: 540px){
+    form.user-login-form .main-section .left, form.user-register-form .main-section .left{
+        display: none;
+    }
+}

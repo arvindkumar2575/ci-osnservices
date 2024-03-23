@@ -26,6 +26,7 @@ class Common extends Model
         if(isset($table)){
             $query = $this->db->table($table)->insert($data);
             $id = $this->db->insertID();
+            // echo $this->db->lastQuery;die();
             return $id;
         }else{
             return $query;
@@ -435,6 +436,20 @@ class Common extends Model
             LEFT JOIN plans as p ON p.id=cvm.plan_id
             LEFT JOIN videos as v ON v.id=cvm.video_id
             ORDER BY cvm.plan_id ASC';
+            $query = $this->db->query($qry);
+            $result = $query->getResultArray();
+        } catch (\Exception $e) {
+            log_message('error',$e->getMessage());
+        }
+        return $result;
+    }
+
+    public function getMedia()
+    {
+        $result = null;
+        try {
+            $qry = 'SELECT * FROM media
+            ORDER BY id ASC';
             $query = $this->db->query($qry);
             $result = $query->getResultArray();
         } catch (\Exception $e) {

@@ -35,41 +35,61 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
-$routes->get('about-us', 'Home::aboutUs');
-$routes->get('contact-us', 'Home::contactUs');
+$routes->get('/', 'OsnServicesLPController::index');
+$routes->get('about-us', 'OsnServicesLPController::aboutUs');
+$routes->get('contact-us', 'OsnServicesLPController::contactUs');
 
-$routes->post('api/form-submit', 'Home::contactFormSubmit');
+$routes->get('login', 'UserController::login');
+$routes->get('register', 'UserController::register');
+$routes->get('logout', 'UserController::logout');
+$routes->get('verification', 'UserController::verification');
+
+$routes->get('mydashboard', 'MyDashboardController::myDashboard');
+$routes->get('excelplay', 'MyDashboardController::excelPlay');
+
+$routes->get('admin', 'AdminController::admin');
+
+
+// api routes 
+$routes->post('api/form-submit', 'OsnServicesLPController::contactFormSubmit');
+
+
+
+
+
+
+
 
 if(FREE_EXCEL_PLAY){
     $routes->get('excel-play', 'ExcelPlay::freeExcelPlay');
 }
 if(PAID_EXCEL_PLAY){
-    $routes->get('login', 'User::index');
-    $routes->get('register', 'User::register');
-    $routes->get('logout', 'User::logout');
-    $routes->get('verification', 'User::verification');
-    $routes->get('dashboard', 'User::dashboard');
-    // $routes->get('dashboard/profile', 'User::profile');
+    $routes->get('login', 'UserController::index');
+    $routes->get('register', 'UserController::register');
+    $routes->get('logout', 'UserController::logout');
+    $routes->get('verification', 'UserController::verification');
+    $routes->get('dashboard', 'UserController::dashboard');
+    // $routes->get('dashboard/profile', 'UserController::profile');
     $routes->get('dashboard/excel-play', 'ExcelPlay::index');
     
     
-    $routes->get('api/login', 'User::userLogin');
-    $routes->post('api/regiser', 'User::userLogin');
-    $routes->post('api/plan-register', 'User::register');
+    $routes->get('api/login', 'UserController::userLogin');
+    $routes->post('api/regiser', 'UserController::userLogin');
+    $routes->post('api/plan-register', 'UserController::register');
 }
 if(ADMIN_PANEL){
     $routes->get('admin', 'Admin::admin');
-    $routes->get('api/search-name-email', 'Admin::searchNameEmail');
 
-    $routes->get('api/fetch-add-edit-form', 'Admin::fetchAddEditForm');
-    $routes->post('api/fetch-add-edit-form', 'Admin::fetchAddEditForm');
-    
+
+    $routes->get('api/search-name-email', 'Admin::searchNameEmail');
+    $routes->match(['get','post'],'api/fetch-add-edit-form', 'Admin::fetchAddEditForm');
     $routes->post('api/add-edit-delete', 'Admin::addEditDeleteFormData');
 }
 
 
+
 // $routes->get('api/youtube/runyt', 'ExcelPlay::runyt');
+
 
 
 
